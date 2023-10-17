@@ -1,0 +1,26 @@
+# version of docker-compose
+version: '3.6'
+
+# list of containers
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: example
+    ports:
+      - "5432:5432"
+
+  server:
+    image: "node:18-alpine"
+    user: "node"
+    depends_on:
+      - db
+    environment:
+      - NODE_ENV=development
+    working_dir: /home/server
+    volumes:
+      - ./server:/home/server
+    ports:
+      - "8080:8080"
+    command: /bin/sh -c "./startup_script.sh"
