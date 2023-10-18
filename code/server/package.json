@@ -8,12 +8,12 @@
         "rollback": "ley down"
     },
     "dependencies": {
-        "bluebird": "^3.7.2",
+        "body-parser": "^1.20.2",
         "dotenv": "^16.3.1",
         "express": "^4.18.2",
         "express-jwt": "^8.4.1",
+        "express-openapi-validator": "^5.0.6",
         "ley": "^0.8.1",
-        "postgres": "^3.4.0",
-        "prexit": "^2.2.0"
+        "postgres": "^3.4.0"
     }
 }

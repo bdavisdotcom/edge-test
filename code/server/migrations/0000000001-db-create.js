@@ -4,7 +4,7 @@ exports.up = async function (DB) {
       CREATE TABLE IF NOT EXISTS users (
         id serial PRIMARY KEY,
         name VARCHAR(256) NOT NULL,
-        email VARCHAR(256) NOT NULL,
+        email VARCHAR(256) NOT NULL UNIQUE,
         password VARCHAR(256) NOT NULL,
         profile_image VARCHAR(256) DEFAULT '',
         created_on BIGINT NOT NULL

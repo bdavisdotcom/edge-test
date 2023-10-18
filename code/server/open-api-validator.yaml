@@ -1,0 +1,158 @@
+openapi: '3.0.0'
+info:
+  version: 1.0.0
+  title: Edge Programming Test
+paths:
+
+  /status:
+    get:
+      responses:
+        '200':
+          description: 'OK'
+
+  /auth/register:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRegister'
+      responses:
+        '200':
+          description: 'OK'
+
+  /auth/login:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserLogin'
+      responses:
+        '200':
+          description: 'OK'
+
+  /user:
+    get:
+      responses:
+        '200':
+          description: 'OK'    
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserUpdate'
+      responses:
+        '200':
+          description: 'OK'
+
+  /tasks:
+    get:
+      responses:
+        '200':
+          description: 'OK'
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskCreate'
+      responses:
+        '200':
+          description: 'OK'
+
+  /tasks/{id}:
+    post:
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskCreate'    
+      responses:
+        '200':
+          description: 'OK'
+    get:
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: 'OK'    
+
+components:
+  schemas:
+
+    TaskCreate:
+      required: [title, description, due_date, priority, status]
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        due_date:
+          type: string
+          format: date
+        priority:
+          type: integer
+        status:
+          type: string
+
+    UserLogin:
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string    
+
+    UserRegister:
+      required:
+        - name
+        - email
+        - password
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        profile_image:
+          type: string
+        password:
+          type: string
+          format: password
+
+    UserUpdate:
+      required:
+        - name
+        - email
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        profile_image:
+          type: string
+        password:
+          type: string
