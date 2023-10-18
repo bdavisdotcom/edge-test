@@ -1,15 +1,11 @@
 require('dotenv').config();
-
-const host = process.env.SERVER_HOSTNAME;
-const port = process.env.SERVER_PORT;
-const version = process.env.SERVER_VERSION;
-const jwtSecret = process.env.JWT_SECRET;
-
 const express = require('express');
-const routes = require('./routes.js')({ jwtSecret });
+const routes = require('./routes.js');
 const app = express();
 
-app.locals = { host, port, version };
+const { SERVER_HOSTNAME: host, SERVER_PORT: port, SERVER_VERSION: version } = process.env;
+
+console.log("**** Server starting up ****");
 
 app.use(routes);
 
@@ -20,6 +16,6 @@ app.use((err, req, res, next) => {
     res.status(err.status).send("UNAUTHORIZED");
 });
 
-app.listen(port, host, () => {
+const server = app.listen(port, host, () => {
     console.log(`Server version ${version} running at http://${host}:${port}/`);
 });

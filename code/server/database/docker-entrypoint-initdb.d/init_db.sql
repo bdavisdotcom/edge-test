@@ -1,0 +1,2 @@
+CREATE DATABASE edge_test;
+GRANT ALL PRIVILEGES ON DATABASE edge_test to postgres;

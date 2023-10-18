@@ -3,11 +3,17 @@
     "version": "1.0.0",
     "author": "Brad Davis <bradbdavis@yahoo.com>",
     "scripts": {
-        "start": "node ./app.js"
+        "start": "node ./app.js",
+        "migrate": "ley up",
+        "rollback": "ley down"
     },
     "dependencies": {
+        "bluebird": "^3.7.2",
         "dotenv": "^16.3.1",
         "express": "^4.18.2",
-        "express-jwt": "^8.4.1"
+        "express-jwt": "^8.4.1",
+        "ley": "^0.8.1",
+        "postgres": "^3.4.0",
+        "prexit": "^2.2.0"
     }
 }

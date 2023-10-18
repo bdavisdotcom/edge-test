@@ -7,9 +7,13 @@ services:
     image: postgres
     restart: always
     environment:
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: example
     ports:
-      - "5432:5432"
+      - "5432:5432"    
+    volumes:
+      - ./server/database/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+    # command: /bin/sh -c "/var/lib/postgresql/startup/startup_script.sh"
 
   server:
     image: "node:18-alpine"
