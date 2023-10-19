@@ -1,4 +1,11 @@
+const jwt = require('jsonwebtoken');
 const userService = require('../services/user.js');
+const { HmacSHA256 } = require('crypto-js');
+
+const generateJWT = ({ id, email }) => {
+    const { JWT_SECRET } = process.env;
+    return jwt.sign({ id, email }, JWT_SECRET, { algorithm: 'HS256' });
+};
 
 module.exports = {
     login: (req, res, next) => {
@@ -9,7 +16,7 @@ module.exports = {
                 if (!user) {
                     res.status(401).json({ 'message': 'Invalid Login', user: null });
                 } else {
-                    res.json({ 'message': 'OK', user })
+                    res.json({ 'message': 'OK', user: { 'jwt': generateJWT(user), ...user } });
                 }
             }, err => {
                 next(err);
@@ -24,7 +31,7 @@ module.exports = {
                 if (!user) {
                     res.status(409).json({ 'message': 'User already exists', user: null })
                 } else {
-                    res.json({ 'message': 'OK', user })
+                    res.json({ 'message': 'OK', user: { 'jwt': generateJWT(user), ...user } })
                 }                
             }, err => {
                 next(err);
