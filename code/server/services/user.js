@@ -34,8 +34,17 @@ const getPublicUserFromData = (user) => {
 // End Utility Functions
 
 module.exports = {
+    getUserById: async (id) => {
+        const users = await sql.getUserById(id);
+        if (users.length === 0) {
+            return null;
+        } else {
+            return getPublicUserFromData(users[0]);
+        }
+    },
+
     getUserByEmail: async ({ email }) => {
-        const users = await sql.getUser(email);
+        const users = await sql.getUserByEmail(email);
         if (users.length === 0) {
             return null;
         } else {
@@ -45,7 +54,7 @@ module.exports = {
 
     registerNewUser: async ({ name, email, password, profile_image }) => {
         // check if user already exists
-        const users = await sql.getUser(email);
+        const users = await sql.getUserByEmail(email);
         if (users.length !== 0) {
             return null;
         }
@@ -68,8 +77,18 @@ module.exports = {
         return getPublicUserFromData(newUser[0]);
     },
 
+    updateUser: async(id, updatedUser) => {
+        const users = await sql.getUserByEmail(id);
+        if (users.length === 0) {
+            return null;
+        }
+        const user = getPublicUserFromData(users[0]);
+
+        await sql.updateUser(user.id, { ...user, ...updatedUser, updated_at: (new Date()).getTime() });
+    },
+
     login: async({ email, password }) => {
-        const user = await sql.getUser(email);
+        const user = await sql.getUserByEmail(email);
         if (user.length === 0) {
             return null;
         }
