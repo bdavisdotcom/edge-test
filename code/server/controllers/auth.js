@@ -2,21 +2,32 @@ const userService = require('../services/user.js');
 
 module.exports = {
     login: (req, res, next) => {
-        res.json({ 'message': 'OK' })
+        const { email, password } = req.body;
+
+        userService.login({ email, password })
+            .then(user => {
+                if (!user) {
+                    res.status(401).json({ 'message': 'Invalid Login', user: null });
+                } else {
+                    res.json({ 'message': 'OK', user })
+                }
+            }, err => {
+                next(err);
+            });
     },
 
     register: (req, res, next) => {
+        const { name, email, password, profile_image = '' } = req.body;
 
-        const body = { name, email, password, profile_image } = req.body;
-
-        const userParams = {
-            name, email, password, profile_image: profile_image ? profile_image : ''
-        };
-
-        userService.registerNewUser(userParams).then(newUser => {
-            res.json({ 'message': 'OK', user: newUser })
-        }, err => {
-            next(err);
-        });       
+        userService.registerNewUser({ name, email, password, profile_image })
+            .then(user => {  
+                if (!user) {
+                    res.status(409).json({ 'message': 'User already exists', user: null })
+                } else {
+                    res.json({ 'message': 'OK', user })
+                }                
+            }, err => {
+                next(err);
+            });        
     }
 }

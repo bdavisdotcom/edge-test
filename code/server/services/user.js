@@ -1,15 +1,81 @@
+const uuid = require('uuid');
+const HMACSHA256 = require('crypto-js/hmac-sha256');
 const sql = require('../database/db.js')
 
+// Utility Functions
+const createPasswordHashString = (password, salt) => {
+    return `${ password }-${ salt }`;
+}
+
+const hashIt = (password, salt) => {
+    const { PASSWORD_HASH_SECRET } = process.env;
+
+    return HMACSHA256(createPasswordHashString(password, salt), PASSWORD_HASH_SECRET).toString();
+}
+
+const isSuppliedPasswordValid = (password, salt, encryptedPassword) => {
+    const encryptedUserSuppliedPassword = hashIt(password, salt);
+
+    return encryptedUserSuppliedPassword === encryptedPassword;
+}
+
+const encryptPassword = (password) => {
+    const salt = uuid.v4();
+    const encryptedPassword = hashIt(password, salt);
+
+    return { salt, encryptedPassword };
+};
+
+const getPublicUserFromData = (user) => {
+    const { password, password_hash_salt, ...publicUser } = user;
+
+    return publicUser;
+}
+// End Utility Functions
+
 module.exports = {
-    registerNewUser: async (userParams) => {
-        console.dir(userParams);
+    getUserByEmail: async ({ email }) => {
+        const users = await sql.getUser(email);
+        if (users.length === 0) {
+            return null;
+        } else {
+            return getPublicUserFromData(users[0]);
+        }
+    },
 
-        const created_on = (new Date()).getTime();
+    registerNewUser: async ({ name, email, password, profile_image }) => {
+        // check if user already exists
+        const users = await sql.getUser(email);
+        if (users.length !== 0) {
+            return null;
+        }
 
-        // TODO: salt and crypto hash the password before storing
-        const { name, email, password, profile_image } = userParams;
-        const newUser = await sql.createUser({ name, email, password, profile_image, created_on });
+        const created_at = (new Date()).getTime();
+        
+        // encrypt password for storage
+        const { salt, encryptedPassword } = encryptPassword(password);
 
-        return newUser;
+        const newUser = await sql.createUser({
+            name,
+            email,
+            password: encryptedPassword,
+            password_hash_salt: salt,
+            profile_image,
+            created_at,
+            updated_at: created_at
+        });
+
+        return getPublicUserFromData(newUser[0]);
+    },
+
+    login: async({ email, password }) => {
+        const user = await sql.getUser(email);
+        if (user.length === 0) {
+            return null;
+        }
+
+        const { name, password_hash_salt, password: encryptedPassword } = user[0];
+
+        return isSuppliedPasswordValid(password, password_hash_salt, encryptedPassword) ? getPublicUserFromData(user[0]) : null;
     }
 }
