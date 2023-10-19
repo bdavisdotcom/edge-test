@@ -24,8 +24,7 @@ module.exports = {
         const updated_at = (new Date()).getTime();
 
         await sql.updateTask(id, user_id, { title, description, due_date, priority, status, updated_at });
-        const updatedTask = await sql.getTaskById(id, user_id);
 
-        return updatedTask[0];
+        return await sql.getTaskById(id, user_id)[0];
     }
 }

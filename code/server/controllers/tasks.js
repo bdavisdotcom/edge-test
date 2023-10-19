@@ -35,7 +35,15 @@ module.exports = {
     },
 
     update: (req, res, next) => {
-        res.json({ status: "OK" });
-    }
+        const { id } = req.params;
+        const user = res.locals.user;
+        const { title, description, due_date, priority, status } = req.body;
 
+        tasks.updateTask(id, user.id, { title, description, due_date, priority, status }).then(updatedTask => {
+            res.json({ status: "OK", task: updatedTask });
+        }, err => {
+            next(err);
+        });
+    }
+    
 }
