@@ -29,8 +29,8 @@ router.use('/auth', authRouter);
 // Task Routes - protected with jwt
 taskRouter.get('/', taskController.getAll);
 taskRouter.get('/:id', taskController.get);
-taskRouter.post('/', taskController.put);
-taskRouter.post('/:id', taskController.post);
+taskRouter.post('/', taskController.create);
+taskRouter.post('/:id', taskController.update);
 router.use('/tasks', [protectedWithJwt, authMiddleware], taskRouter);
 
 // User Routes - protected with jwt

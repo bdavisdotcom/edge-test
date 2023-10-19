@@ -52,6 +52,27 @@ paths:
 
   /tasks:
     get:
+      parameters:
+        - name: sort
+          in: query
+          schema:
+            type: string
+            items:
+              type: string
+              enum:
+                - created_at
+                - due_date
+                - priority
+                - status
+        - name: direction
+          in: query
+          schema:
+            type: string
+            items:
+              type: string
+              enum:
+                - asc
+                - desc
       responses:
         '200':
           description: 'OK'
@@ -107,8 +128,8 @@ components:
         description:
           type: string
         due_date:
-          type: string
-          format: date
+          type: integer
+          format: int64
         priority:
           type: integer
         status:
