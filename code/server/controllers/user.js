@@ -3,18 +3,22 @@ const user = require('../services/user.js');
 module.exports = {
     get: (req, res, next) => {
         try {            
-            res.json({ status: "OK", user: req.locals.user });
+            res.json({ status: "OK", user: res.locals.user });
         } catch(exc) {
             next(exc);
         }
     }, 
     update: (req, res, next) => {
         try {
-            const currentUser = req.locals.user;
+            const currentUser = res.locals.user;
             const { name, email, profile_image } = req.body;
-            const updatedUser = user.updateUser(currentUser.id, { name, email, profile_image });
 
-            res.json({ status: "OK", user: updatedUser });
+            user.updateUser(currentUser.id, { name, email, profile_image }).then(updatedUser => {
+                res.json({ status: "OK", user: updatedUser });
+            }, err => {
+                next(err);
+            });
+            
         } catch(exc) {
             next(exc);
         }

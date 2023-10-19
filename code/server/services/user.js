@@ -78,13 +78,17 @@ module.exports = {
     },
 
     updateUser: async(id, updatedUser) => {
-        const users = await sql.getUserByEmail(id);
+        const users = await sql.getUserById(id);
         if (users.length === 0) {
             return null;
         }
         const user = getPublicUserFromData(users[0]);
 
-        await sql.updateUser(user.id, { ...user, ...updatedUser, updated_at: (new Date()).getTime() });
+        const finalUser = { ...user, ...updatedUser, updated_at: (new Date()).getTime() };
+
+        await sql.updateUser(user.id, finalUser);
+        
+        return getPublicUserFromData(finalUser);
     },
 
     login: async({ email, password }) => {

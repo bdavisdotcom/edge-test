@@ -4,16 +4,16 @@ module.exports = (req, res, next) => {
     console.log("*** Auth token checker");
     console.dir(req.auth);
 
-    let returnUser = null;
-
     if (req.auth && req.auth.id && req.auth.email) {
-        const loadedUser = user.getUserById(req.auth.id);
-        if (loadedUser.email === req.auth.email) {
-            returnUser = loadedUser;
-        }
+        user.getUserById(req.auth.id).then(user => {
+            console.dir(user);
+            res.locals.user = user;
+            next();
+        }, err => {
+            next(err);
+        });
+    } else {
+        res.locals.user = null;
+        next();
     }
-
-    req.locals.user = returnUser;
-
-    next();
 };

@@ -19,8 +19,7 @@ module.exports = {
         const updatedUser = await sql`
             update users
             set name = ${ name }, email = ${ email }, profile_image = ${ profile_image }, updated_at = ${ updated_at }
-            where id = id
-            returning id, name, email, profile_image, created_at, updated_at
+            where id = ${ id }
         `;
     },
 
@@ -40,7 +39,6 @@ module.exports = {
             FROM users
             WHERE id = ${ id }
         `;
-        
         return user;
     }
 };

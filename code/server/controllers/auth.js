@@ -4,7 +4,7 @@ const { HmacSHA256 } = require('crypto-js');
 
 const generateJWT = ({ id, email }) => {
     const { JWT_SECRET } = process.env;
-    return jwt.sign({ id, email }, JWT_SECRET, { algorithm: 'HS256' });
+    return jwt.sign({ id, email }, Buffer.from(JWT_SECRET, "base64"), { algorithm: 'HS256', expiresIn: '1h' });
 };
 
 module.exports = {
