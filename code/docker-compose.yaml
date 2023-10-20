@@ -13,7 +13,6 @@ services:
       - "5432:5432"    
     volumes:
       - ./server/database/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
-    # command: /bin/sh -c "/var/lib/postgresql/startup/startup_script.sh"
 
   server:
     image: "node:18-alpine"
@@ -28,3 +27,15 @@ services:
     ports:
       - "8080:8080"
     command: /bin/sh -c "./startup_script.sh"
+
+  web:
+    image: nginx
+    depends_on:
+      - db
+      - server
+    ports:
+      - "80:80"
+    volumes:
+      - ./web/build:/home/www
+      - ./web/conf/nginx.conf:/etc/nginx/nginx.conf
+      - ./web/conf/proxy.conf:/etc/nginx/proxy.conf
