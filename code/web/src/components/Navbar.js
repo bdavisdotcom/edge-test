@@ -1,4 +1,4 @@
-const Navbar = ({ navChangeHandler, loggedInUserName, currentPage }) => {
+const Navbar = ({ navCommandHandler, loggedInUserName, currentPage }) => {
     return (
         <>
             <nav className="navbar">
@@ -7,15 +7,15 @@ const Navbar = ({ navChangeHandler, loggedInUserName, currentPage }) => {
                     {
                         !loggedInUserName &&
                         <>
-                            <button onClick={() => navChangeHandler('login')}>Login</button>
-                            <button onClick={() => navChangeHandler('register')}>Register</button>
+                            <button onClick={() => navCommandHandler('login')}>Login</button>
+                            <button onClick={() => navCommandHandler('register')}>Register</button>
                         </>
                     }
                     {
                         loggedInUserName &&
                         <div>
                             <label>Hello, {loggedInUserName}</label>
-                            <button onClick={() => navChangeHandler('logout')}>Logout</button>
+                            <button onClick={() => navCommandHandler('logout')}>Logout</button>
                         </div>
                         
                     }
@@ -23,12 +23,12 @@ const Navbar = ({ navChangeHandler, loggedInUserName, currentPage }) => {
             </nav>
             <nav className="navbar sub-navbar">
                 <div className="links">
-                    { currentPage !== 'home' && <button onClick={() => navChangeHandler('home')}>Home</button> }
+                    { currentPage !== 'home' && <button onClick={() => navCommandHandler('home')}>Home</button> }
                     {
                         loggedInUserName &&
                             <>
-                                <button onClick={() => navChangeHandler('profile')}>User Profile</button>
-                                <button onClick={() => navChangeHandler('task-list')}>Task List</button>
+                                <button onClick={() => navCommandHandler('profile')}>User Profile</button>
+                                <button onClick={() => navCommandHandler('task')}>Task List</button>
                             </>
                     }
                 </div>

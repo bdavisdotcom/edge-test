@@ -5,6 +5,8 @@
 - Install Docker Desktop (VM was WSL)
 - From this repo's /code folder (where the docker-compose.yaml file is located)
     Run the command "docker-compose up"
+- Browser cookies must be enabled for this to work correctly
+- tested in Chrome & Firefox
 
 ## List of dev comments
 

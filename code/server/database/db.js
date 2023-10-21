@@ -2,6 +2,16 @@ const postgres = require('postgres');
 
 const sql = postgres();
 
+// postgres nodejs driver seems to convert bigint (epoch timestamp) into strings...
+// there is no "int64/bigint" in javascript, hmm...
+const fixTaskPostgresDriverLongIssue = (tasks) => {
+    return tasks.map(task => { return { ...task, due_date: Number(task.due_date), created_at: Number(task.created_at), updated_at: Number(task.updated_at) }; });
+};
+
+const fixUserPostgresDriverLongIssue = (users) => {
+    return users.map(user => { return { ...user, created_at: Number(user.created_at), updated_at: Number(user.updated_at) }; });
+};
+
 module.exports = {
     createUser: async ({ name, email, password, password_hash_salt, profile_image, created_at, updated_at }) => {
         const newUser = await sql`
@@ -30,7 +40,7 @@ module.exports = {
             WHERE email = ${ email }
         `;
 
-        return user;
+        return fixUserPostgresDriverLongIssue(user);
     },
 
     getUserById: async (id) => {
@@ -39,7 +49,7 @@ module.exports = {
             FROM users
             WHERE id = ${ id }
         `;
-        return user;
+        return fixUserPostgresDriverLongIssue(user);
     },
 
     getTasks: async(userId, orderBy, direction) => {
@@ -55,8 +65,8 @@ module.exports = {
             WHERE user_id = ${ userId }
             ORDER BY ${ order_clause + ' ' + direction_clause }
         `;
-
-        return tasks;
+        
+        return fixTaskPostgresDriverLongIssue(tasks);
     },
 
     getTaskById: async(id, user_id) => {
@@ -66,7 +76,7 @@ module.exports = {
             WHERE user_id = ${ userId } and id = ${ id }
         `;
 
-        return tasks;
+        return fixTaskPostgresDriverLongIssue(tasks);
     },
 
     updateTask: async(id, user_id, { title, description, due_date, priority, status, updated_at }) => {

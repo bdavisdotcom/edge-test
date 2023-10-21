@@ -35,6 +35,13 @@ const UserProfile = ({ currentUser }) => {
             <div>
                 <button onClick={updateProfile}>Update</button>
             </div>
+            {
+                currentUser &&
+                <div>
+                    <label>Last Updated</label>
+                    <label>{(new Date(currentUser.updated_at)).toISOString().split('T')[0]}</label>
+                </div>
+            }
         </div>
     );
 }

@@ -5,7 +5,7 @@ import Navbar from './Navbar';
 import Login from './Login';
 import Register from './Register';
 import UserProfile from './UserProfile';
-import TaskList from './TaskList';
+import Task from './Task';
 import Cookies from 'universal-cookie';
 import { COOKIE_NAME } from '../config/app-configs';
 import apiService from '../services/api-service';
@@ -30,20 +30,16 @@ function App() {
       })
   }, []);
 
-  const onNavChange = (page) => {
+  const onNavCommand = (page) => {
     switch(page) {
       case 'logout':
-        logout();
+        setCurrentUser(null);
+        setCurrentPage('home');
+        cookies.remove(COOKIE_NAME);
         break;
       default:
         setCurrentPage(page);    
     }
-  };
-
-  const logout = () => {
-    setCurrentUser(null);
-    setCurrentPage('home');
-    cookies.remove(COOKIE_NAME);
   };
 
   const onLogin = (user) => {
@@ -58,12 +54,12 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar currentPage={currentPage} loggedInUserName={currentUser !== null ? currentUser.name : null} navChangeHandler={onNavChange} />
+      <Navbar currentPage={currentPage} loggedInUserName={currentUser !== null ? currentUser.name : null} navCommandHandler={onNavCommand} />
       <div className="content">
         {currentPage==='home' && <Home />}
         {currentPage==='login' && <Login loginHandler={onLogin} />}
         {currentPage==='register' && <Register />}
-        {currentPage==='task-list' && <TaskList currentUser={currentUser} />}
+        {currentPage==='task' && <Task currentUser={currentUser} />}
         {currentPage==='profile' && <UserProfile currentUser={currentUser} />}
       </div>
     </div>
