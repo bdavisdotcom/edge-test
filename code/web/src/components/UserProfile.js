@@ -1,20 +1,23 @@
 import { useEffect, useState } from "react";
 import apiService from "../services/api-service";
 
-const UserProfile = ({ currentUser }) => {
+const UserProfile = ({ currentUser, profileHandler }) => {
 
     const [userName, setUserName] = useState(currentUser ? currentUser.name : '');
     const [email, setEmail] = useState(currentUser ? currentUser.email : '');
     const [profileImage, setProfileImage] = useState(currentUser ? currentUser.profile_image : '');
 
-    // useEffect(() => {
-    //     setUserName(currentUser.name);
-    //     setEmail(currentUser.email);
-    //     setProfileImage(currentUser.profile_image);
-    // }, [currentUser]);
-
     const updateProfile = () => {
-
+        apiService.updateUser(currentUser.jwt, { name: userName, email, profile_image: profileImage })
+            .then(results => {
+                const { user } = results.data;
+                if (user) {
+                    profileHandler({ jwt: null });
+                }                
+            })
+            .catch(err => {
+                console.dir(err);
+            });
     };
 
     return (

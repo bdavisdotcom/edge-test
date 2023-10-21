@@ -27,7 +27,7 @@ function App() {
       })
       .catch(err => {
         console.dir(err);
-      })
+      });
   }, []);
 
   const onNavCommand = (page) => {
@@ -52,15 +52,33 @@ function App() {
     }
   }
 
+  const onProfileUpdateOrRegister = ({ jwt }) => {
+    // jwt won't be present for profile updates...
+    if (jwt) {
+      cookies.set(COOKIE_NAME, jwt);
+    }
+
+    const useJwt = cookies.get(COOKIE_NAME);
+
+    apiService.getUser(useJwt)
+      .then(results => {
+        results.data.user && setCurrentUser({ ...results.data.user, jwt: useJwt });
+        setCurrentPage('home');
+      })
+      .catch(err => {
+        console.dir(err);
+      });
+  }
+
   return (
     <div className="App">
       <Navbar currentPage={currentPage} loggedInUserName={currentUser !== null ? currentUser.name : null} navCommandHandler={onNavCommand} />
       <div className="content">
         {currentPage==='home' && <Home />}
         {currentPage==='login' && <Login loginHandler={onLogin} />}
-        {currentPage==='register' && <Register />}
+        {currentPage==='register' && <Register registerHandler={onProfileUpdateOrRegister} />}
         {currentPage==='task' && <Task currentUser={currentUser} />}
-        {currentPage==='profile' && <UserProfile currentUser={currentUser} />}
+        {currentPage==='profile' && <UserProfile profileHandler={onProfileUpdateOrRegister} currentUser={currentUser} />}
       </div>
     </div>
   );

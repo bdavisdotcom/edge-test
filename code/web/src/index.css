@@ -36,3 +36,8 @@
   margin: 40px auto;
   padding: 20px;
 }
+
+.error {
+  color: red;
+  border-color: red;
+}

@@ -12,6 +12,7 @@ const Home = () => {
                 <li>Edit an existing task</li>
                 <li>Add a new task</li>
             </ul>
+            <div>Please see Reviewer-README.md for more details / comments </div>
         </>
     );
 }

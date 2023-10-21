@@ -73,7 +73,7 @@ module.exports = {
         const tasks = await sql`
             SELECT id, user_id, title, description, due_date, priority, status, created_at, updated_at
             FROM tasks
-            WHERE user_id = ${ userId } and id = ${ id }
+            WHERE user_id = ${ user_id } and id = ${ id }
         `;
 
         return fixTaskPostgresDriverLongIssue(tasks);
