@@ -8,21 +8,24 @@ const getEmptyTask = () => {
         title: '',
         description: '',
         due_date: (new Date(cur.setMonth(cur.getMonth()+1))).getTime(),
-        status: 'OPEN'
+        status: 'OPEN',
+        created_at: cur.getTime(),
+        updated_at: cur.getTime()
     };
 };
 
-const formatDueDate = (timestamp) => {
-    if (!timestamp) {
-        const cur = new Date();
-        return new Date(cur.setMonth(cur.getMonth()+1));
-    }
+const formatDisplayDate = (timestamp) => {
+    // if (!timestamp) {
+    //     const cur = new Date();
+    //     return new Date(cur.setMonth(cur.getMonth()+1));
+    // }
     return new Date(timestamp);
 };
 
 const TaskEdit = ({ taskCommandHandler, currentUser, task }) => {
-    const initDate = (task !== null) ? formatDueDate(task.due_date) : formatDueDate(null);
-    const [currentTask, setCurrentTask] = useState(task || getEmptyTask());
+    const initTask = task || getEmptyTask(); // for initializing states only
+    const initDate = formatDisplayDate(initTask.due_date);
+    const [currentTask, setCurrentTask] = useState(initTask);
     const [dueDate, setDueDate] = useState(initDate);
     const [formState, setFormState] = useState({
         priority: {
@@ -103,11 +106,6 @@ const TaskEdit = ({ taskCommandHandler, currentUser, task }) => {
             return;
         }
 
-        console.dir(currentUser);
-        console.dir(currentTask);
-
-        console.log("Task onSubmit");
-
         if (task && task.id) {
             apiService.updateTask(currentUser.jwt, task.id, currentTask)
             .then(results => {
@@ -169,19 +167,6 @@ const TaskEdit = ({ taskCommandHandler, currentUser, task }) => {
                     <label>Due Date</label>
                     <input type="date" name="due_date" value={dueDate.toISOString().split('T')[0]} onChange={onTaskChange} />
                 </div>
-                {
-                    task && task.id !== null &&
-                    <>
-                        <div>
-                            <label>Last Updated</label>
-                            <label>{(new Date(currentTask.updated_at)).toISOString().split('T')[0]}</label>
-                        </div>
-                        <div>
-                            <label>Created</label>
-                            <label>{(new Date(currentTask.created_at)).toISOString().split('T')[0]}</label>
-                        </div>
-                    </>
-                }
             </div>
             <div>
                 <button onClick={onSubmit}>Submit</button>
