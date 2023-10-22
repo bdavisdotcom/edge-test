@@ -54,3 +54,8 @@
   display: inline;
   margin: 10px 20px 10px 10px;
 }
+
+.inline-container > * {
+  display: inline;
+  margin: 15px 25px 15px 0px;
+}

@@ -5,6 +5,7 @@ const Login = ({ loginHandler }) => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
 
     const onSubmit = () => {
         console.log(`${email} ${password}`);
@@ -16,7 +17,8 @@ const Login = ({ loginHandler }) => {
             })
             .catch(err => {
                 console.dir(err);
-                loginHandler(null);
+                setErrorMessage('Invalid login');
+                loginHandler(null);                
             })
     };
 
@@ -33,8 +35,9 @@ const Login = ({ loginHandler }) => {
                 <label>Password</label>
                 <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
             </div>
-            <div>
+            <div className='inline-container'>
                 <button onClick={onSubmit}>Submit</button>
+                <label className='error'>{errorMessage}</label>
             </div>
         </div>
     );

@@ -6,6 +6,7 @@ const UserProfile = ({ currentUser, profileHandler }) => {
     const [userName, setUserName] = useState(currentUser ? currentUser.name : '');
     const [email, setEmail] = useState(currentUser ? currentUser.email : '');
     const [profileImage, setProfileImage] = useState(currentUser ? currentUser.profile_image : '');
+    const [errorMessage, setErrorMessage] = useState('');
 
     const updateProfile = () => {
         apiService.updateUser(currentUser.jwt, { name: userName, email, profile_image: profileImage })
@@ -17,6 +18,7 @@ const UserProfile = ({ currentUser, profileHandler }) => {
             })
             .catch(err => {
                 console.dir(err);
+                setErrorMessage('Error updating user profile. See console for details.');
             });
     };
 
@@ -35,8 +37,9 @@ const UserProfile = ({ currentUser, profileHandler }) => {
                 <label>Profile Image</label>
                 <input type="text" value={profileImage} onChange={(e) => setProfileImage(e.target.value)} />
             </div>
-            <div>
+            <div className="inline-container">
                 <button onClick={updateProfile}>Update</button>
+                <label className='error'>{errorMessage}</label>
             </div>
             {
                 currentUser &&

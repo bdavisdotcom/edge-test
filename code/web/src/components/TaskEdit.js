@@ -27,6 +27,7 @@ const formatDateForInputControl = (dt) => {
 const TaskEdit = ({ taskCommandHandler, currentUser, task }) => {
     const initTask = task || getEmptyTask(); // for initializing states only
     const initDate = formatDisplayDate(initTask.due_date);
+    const [errorMessage, setErrorMessage] = useState('');
     const [currentTask, setCurrentTask] = useState(initTask);
     const [dueDate, setDueDate] = useState(initDate);
     const [formState, setFormState] = useState({
@@ -107,14 +108,20 @@ const TaskEdit = ({ taskCommandHandler, currentUser, task }) => {
                 console.dir(results);
                 taskCommandHandler({ command: "list", taskId: null });
             })
-            .catch(err => { console.dir(err); })
+            .catch(err => {
+                console.dir(err);
+                setErrorMessage('Error updating task. See console for details.');
+            })
         } else {
             apiService.createTask(currentUser.jwt, currentTask)
             .then(results => {
                 console.dir(results);
                 taskCommandHandler({ command: "list", taskId: null });
             })
-            .catch(err => { console.dir(err); })
+            .catch(err => {
+                console.dir(err);
+                setErrorMessage('Error creating task. See console for details.');
+            })
         }
     };
 
@@ -163,9 +170,10 @@ const TaskEdit = ({ taskCommandHandler, currentUser, task }) => {
                     <input type="datetime-local" name="due_date" value={formatDateForInputControl(dueDate)} onChange={onTaskChange} />
                 </div>
             </div>
-            <div>
+            <div className='inline-container'>
                 <button onClick={onSubmit}>Submit</button>
                 <button onClick={onCancel}>Cancel</button>
+                <label className='error'>{errorMessage}</label>
             </div>
         </>
     );

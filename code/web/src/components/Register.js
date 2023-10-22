@@ -6,6 +6,7 @@ const Register = ({ registerHandler }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassowrd, setConfirmPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
 
     const register = () => {
         const newUser = { name: userName, email, password };
@@ -15,6 +16,7 @@ const Register = ({ registerHandler }) => {
             })
             .catch(err => {
                 console.dir(err);
+                setErrorMessage('Error completing registration. Please see console for details.');
             })
     };
 
@@ -37,8 +39,9 @@ const Register = ({ registerHandler }) => {
                 <label>Confirm Password</label>
                 <input type="password" value={confirmPassowrd} onChange={(e) => setConfirmPassword(e.target.value)} />
             </div>
-            <div>
+            <div className='inline-container'>
                 <button onClick={register}>Update</button>
+                <label className='error'>{errorMessage}</label>
             </div>     
         </div>
     );
