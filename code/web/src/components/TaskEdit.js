@@ -15,12 +15,14 @@ const getEmptyTask = () => {
 };
 
 const formatDisplayDate = (timestamp) => {
-    // if (!timestamp) {
-    //     const cur = new Date();
-    //     return new Date(cur.setMonth(cur.getMonth()+1));
-    // }
     return new Date(timestamp);
 };
+
+const formatDateForInputControl = (dt) => {
+    // var d = (new Date(timestamp));
+    dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
+    return dt.toISOString().slice(0,16);
+}
 
 const TaskEdit = ({ taskCommandHandler, currentUser, task }) => {
     const initTask = task || getEmptyTask(); // for initializing states only
@@ -48,7 +50,6 @@ const TaskEdit = ({ taskCommandHandler, currentUser, task }) => {
     });
 
     const isFormValid = () => {
-        //return isFieldValid('priority') && isFieldValid('title') && isFieldValid('description');
         let priority = checkFieldValid('priority');
         let title = checkFieldValid('title');
         let description = checkFieldValid('description');
@@ -65,17 +66,11 @@ const TaskEdit = ({ taskCommandHandler, currentUser, task }) => {
             case 'priority':
                 if ((currentTask.priority.length && currentTask.priority.length === 0) || !Number.isInteger(parseInt(currentTask.priority, 10)) || parseInt(currentTask.priority, 10) < 1) {
                     return { valid: false, msg: 'Priority is required and must be a positive integer.' };
-                    // setFormState({ ...formState, priority : { valud: false, msg: 'Priority is required and must be a positive integer.' }});
-                    // return false;
                 }
                 break;
             default:
                 if (currentTask[fieldName].length === 0) {
                     return { valid: false, msg: `${fieldName} is required!` };
-                    // const newFormState = { ...formState };
-                    // newFormState[fieldName] = { valid: false, msg: `${fieldName} is required!` };
-                    // setFormState(newFormState);
-                    // return false;
                 }                
         }
         return { valid: true, msg: '' };
@@ -86,7 +81,7 @@ const TaskEdit = ({ taskCommandHandler, currentUser, task }) => {
         const updatedTask = { ...currentTask };
 
         switch(e.target.type) {
-            case 'date':
+            case 'datetime-local':
                 const updatedDate = new Date(e.target.value);
                 updatedTask[field] = updatedDate.getTime();
                 setDueDate(updatedDate);
@@ -165,7 +160,7 @@ const TaskEdit = ({ taskCommandHandler, currentUser, task }) => {
                 </div>
                 <div>
                     <label>Due Date</label>
-                    <input type="date" name="due_date" value={dueDate.toISOString().split('T')[0]} onChange={onTaskChange} />
+                    <input type="datetime-local" name="due_date" value={formatDateForInputControl(dueDate)} onChange={onTaskChange} />
                 </div>
             </div>
             <div>

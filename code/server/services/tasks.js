@@ -26,5 +26,9 @@ module.exports = {
         await sql.updateTask(id, user_id, { title, description, due_date, priority, status, updated_at });
 
         return await sql.getTaskById(id, user_id)[0];
+    },
+
+    deleteTask: async(id, user_id) => {
+        return await sql.deleteTask(id, user_id);
     }
 }

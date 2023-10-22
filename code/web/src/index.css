@@ -45,3 +45,12 @@
 .ag-grid-style {
   height: 400px !important;
 }
+
+.filter-div {
+  padding: 10px;
+}
+
+.filter-div div {
+  display: inline;
+  margin: 10px 20px 10px 10px;
+}

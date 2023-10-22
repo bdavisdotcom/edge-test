@@ -36,6 +36,9 @@ const apiService = {
         const updatedTask = { priority: parsedPriority, due_date, title, description, status };
         return axios.post(`${API_URL}/tasks/${id}`, updatedTask, getAuthHeader(jwt));
     },
+    deleteTask: (jwt, id) => {
+        return axios.delete(`${API_URL}/tasks/${id}`, getAuthHeader(jwt));
+    }
 };
 
 export default apiService;

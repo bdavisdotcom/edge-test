@@ -2,6 +2,7 @@ import { useState } from 'react';
 import TaskList from "./TaskList";
 import TaskEdit from './TaskEdit';
 
+
 const Task = ({ currentUser }) => {
 
     const [taskMode, setTaskMode] = useState("list");

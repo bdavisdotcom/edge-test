@@ -44,6 +44,18 @@ module.exports = {
         }, err => {
             next(err);
         });
+    },
+
+    delete: (req, res, next) => {
+        const { id } = req.params;
+        const user = res.locals.user;
+
+        tasks.deleteTask(id, user.id)
+            .then(results => {
+                res.json({ status: "OK" });
+            }).catch(err => {
+                next(err);
+            });
     }
     
 }

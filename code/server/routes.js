@@ -31,6 +31,7 @@ taskRouter.get('/', taskController.getAll);
 taskRouter.get('/:id', taskController.get);
 taskRouter.post('/', taskController.create);
 taskRouter.post('/:id', taskController.update);
+taskRouter.delete('/:id', taskController.delete);
 router.use('/tasks', [protectedWithJwt, authMiddleware], taskRouter);
 
 // User Routes - protected with jwt

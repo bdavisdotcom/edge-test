@@ -63,8 +63,10 @@ module.exports = {
             SELECT id, user_id, title, description, due_date, priority, status, created_at, updated_at
             FROM tasks
             WHERE user_id = ${ userId }
-            ORDER BY ${ order_clause + ' ' + direction_clause }
+            ORDER BY id ASC
         `;
+
+            // ORDER BY ${ order_clause + ' ' + direction_clause }
         
         return fixTaskPostgresDriverLongIssue(tasks);
     },
@@ -97,6 +99,12 @@ module.exports = {
         `;
 
         return task;
+    },
+
+    deleteTask: async(id, user_id) => {
+        await sql`
+            DELETE FROM tasks where id = ${id} and user_id = ${user_id}
+        `;
     }
     
 };
