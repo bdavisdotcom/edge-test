@@ -37,10 +37,6 @@ const UserProfile = ({ currentUser, profileHandler }) => {
                 <label>Profile Image</label>
                 <input type="text" value={profileImage} onChange={(e) => setProfileImage(e.target.value)} />
             </div>
-            <div className="inline-container">
-                <button onClick={updateProfile}>Update</button>
-                <label className='error'>{errorMessage}</label>
-            </div>
             {
                 currentUser &&
                 <div>
@@ -48,6 +44,10 @@ const UserProfile = ({ currentUser, profileHandler }) => {
                     <label>{(new Date(currentUser.updated_at)).toISOString().split('T')[0]}</label>
                 </div>
             }
+            <div className="inline-container">
+                <button onClick={updateProfile}>Update</button>
+                <label className='error'>{errorMessage}</label>
+            </div>
         </div>
     );
 }

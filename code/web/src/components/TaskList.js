@@ -20,7 +20,7 @@ const getTasks = (user, statusFilter, callback) => {
     })
     .catch(err => {
         console.dir(err);
-        callback(null);
+        callback(null, err);
     });
 };
 
@@ -28,9 +28,13 @@ const TaskList = ({ taskCommandHandler, currentUser }) => {
 
     const [tasks, setTasks] = useState([]);
     const [filter, setFilter] = useState('ALL');
+    const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => {
-        getTasks(currentUser, filter, (tasks) => {
+        getTasks(currentUser, filter, (tasks, err) => {
+            if (err) {
+                setErrorMessage('Error loading tasks. Please see console for details.');
+            }
             if (tasks) {
                 setTasks(tasks);
             }
@@ -53,6 +57,7 @@ const TaskList = ({ taskCommandHandler, currentUser }) => {
             })
             .catch(err => {
                 console.dir(err);
+                setErrorMessage('Error deleting task. Please see console for details.');
             });        
     }
 
@@ -100,8 +105,9 @@ const TaskList = ({ taskCommandHandler, currentUser }) => {
                     defaultColDef={{ sortable: true }}
                     columnDefs={colDefs}>
                 </ AgGridReact>
-                <div>
+                <div className="inline-container">
                     <button onClick={onAddTask}>Add Task</button>
+                    <label className="error">{errorMessage}</label>
                 </div>
             </div>
         </div>

@@ -1,0 +1,310 @@
+{
+	"info": {
+		"_postman_id": "ef9d32bb-77a7-4eaf-b160-e6d228635441",
+		"name": "edge-code-test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "user",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{server_url}}/user",
+							"host": [
+								"{{server_url}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Bradley B Davis\",\n\t\"email\": \"bradbdavis@yahoo.com\",\n\t\"profile_image\": \"\"\n}"
+						},
+						"url": {
+							"raw": "{{server_url}}/user",
+							"host": [
+								"{{server_url}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"bradbdavis@yahoo.com\",\n\t\"password\": \"Tycho0103\"\n}"
+						},
+						"url": {
+							"raw": "{{server_url}}/auth/login",
+							"host": [
+								"{{server_url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Brad Davis\",\n\t\"email\": \"bradbdavis@yahoo.com\",\n\t\"password\": \"Tycho0103\"\n}"
+						},
+						"url": {
+							"raw": "{{server_url}}/auth/register",
+							"host": [
+								"{{server_url}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "tasks",
+			"item": [
+				{
+					"name": "tasks",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{server_url}}/tasks?sort=priority&direction=desc",
+							"host": [
+								"{{server_url}}"
+							],
+							"path": [
+								"tasks"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "priority"
+								},
+								{
+									"key": "direction",
+									"value": "desc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "task by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{server_url}}/tasks/1",
+							"host": [
+								"{{server_url}}"
+							],
+							"path": [
+								"tasks",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "task",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Test task 1\",\n\t\"description\": \"This is a test of my tasks\",\n\t\"due_date\": 1697746059915,\n\t\"priority\": 2,\n\t\"status\": \"CLOSED\"\n}"
+						},
+						"url": {
+							"raw": "{{server_url}}/tasks",
+							"host": [
+								"{{server_url}}"
+							],
+							"path": [
+								"tasks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "task by id",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Test task 3 CHEESE\",\n\t\"description\": \"CHEESE\",\n\t\"due_date\": 1697746059815,\n\t\"priority\": 1,\n\t\"status\": \"OPEN\"\n}"
+						},
+						"url": {
+							"raw": "{{server_url}}/tasks/1",
+							"host": [
+								"{{server_url}}"
+							],
+							"path": [
+								"tasks",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "task",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{server_url}}/tasks/1",
+							"host": [
+								"{{server_url}}"
+							],
+							"path": [
+								"tasks",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "api health check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{server_url}}/status",
+					"host": [
+						"{{server_url}}"
+					],
+					"path": [
+						"status"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

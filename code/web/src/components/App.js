@@ -12,22 +12,40 @@ import apiService from '../services/api-service';
 
 const cookies = new Cookies(null, { path: '/' });
 
+const getUser = (jwt, callback) => {
+  return apiService.getUser(jwt)
+  .then(results => {
+    if (results.data.user) {
+      callback({ ...results.data.user, jwt }, null);
+    } else {
+      callback(null, 'No user found.');
+    }
+  })
+  .catch(err => {
+    console.dir(err);
+    callback(null, err);
+  });
+};
+
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
   const [currentUser, setCurrentUser] = useState(null);
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     const jwt = cookies.get(COOKIE_NAME);
     if (!jwt) {
       return;
     }
-    apiService.getUser(jwt)
-      .then(results => {
-        results.data.user && setCurrentUser({ ...results.data.user, jwt });
-      })
-      .catch(err => {
-        console.dir(err);
-      });
+    getUser(jwt, (user, err) => {
+      if (err) {
+        setErrorMessage('Error loading logged in user. Please see console for details.');
+        return;
+      }
+      if (user) {
+        setCurrentUser(user);
+      }
+    });
   }, []);
 
   const onNavCommand = (page) => {
@@ -60,14 +78,16 @@ function App() {
 
     const useJwt = cookies.get(COOKIE_NAME);
 
-    apiService.getUser(useJwt)
-      .then(results => {
-        results.data.user && setCurrentUser({ ...results.data.user, jwt: useJwt });
+    getUser(useJwt, (user, err) => {
+      if (err) {
+        setErrorMessage('Unable to load logged in user. Please see console for details.');
+        return;
+      }
+      if (user) {
+        setCurrentUser(user);
         setCurrentPage('home');
-      })
-      .catch(err => {
-        console.dir(err);
-      });
+      }
+    })
   }
 
   return (
@@ -79,6 +99,9 @@ function App() {
         {currentPage==='register' && <Register registerHandler={onProfileUpdateOrRegister} />}
         {currentPage==='task' && <Task currentUser={currentUser} />}
         {currentPage==='profile' && <UserProfile profileHandler={onProfileUpdateOrRegister} currentUser={currentUser} />}
+      </div>
+      <div className="inline-container">
+        <label className='error'>{errorMessage}</label>
       </div>
     </div>
   );
