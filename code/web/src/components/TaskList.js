@@ -94,7 +94,7 @@ const TaskList = ({ taskCommandHandler, currentUser }) => {
             <h2>Task List</h2>
             <div className="ag-theme-alpine" style={ { height: 400 } }>
                 <div className="filter-div">
-                    <label>Options Filter</label>
+                    <label for='filter'>Options Filter</label>
                     <div><input type="radio" name="filter" value="ALL" checked={filter === 'ALL'} onChange={onFilterChange} /> <label>ALL</label></div>
                     <div><input type="radio" name="filter" value="OPEN" checked={filter === 'OPEN'} onChange={onFilterChange} /> <label>OPEN</label></div>
                     <div><input type="radio" name="filter" value="CLOSED" checked={filter === 'CLOSED'} onChange={onFilterChange} /> <label>CLOSED</label></div>
