@@ -13,6 +13,7 @@
 - you can use pgAdmin (postgres management app) to inspect the DB -- @ localhost port 5432, 'postgre' user, 'example' password,  'edge_test' database
 - you can use the included Postman collection to hit the API directly (import the included postman collection & environment)
 - if you use the postman collection, you must copy / paste the JWT you get back from LOGIN into the environment variable manually. It will expire after 1 hour as well.
+- if its needed to rebuild the FE react stuff, issue "npm install" and then "npm run build" from the /web folder.
 ## List of dev comments
 - I wrote all of this by hand, manually-- except for bootstrapping the react app so I wouldn't have to write webpack,etc, configs. I referenced the web where needed, as I have used many different languages and tech stack in the last few years--things get lost if not used regularly (used agGrid, used their docs, etc)
 - I didn't get time to work on css / styles
