@@ -21,4 +21,4 @@
 ### In the real world...
 - All this should be under HTTPS (this was not done for this test)
 - .env file would not be checked into github -- done it here so reviewer doesn't have to put one together
-- No passwords or other sensitive data should ever be checked into github
+- No passwords or other sensitive data should ever be checked into github -- should be put into AWS secrets manager or similar, use AWS API to pull at run time
