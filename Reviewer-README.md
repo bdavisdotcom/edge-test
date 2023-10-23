@@ -1,5 +1,7 @@
 # Notes to the reviewer
 
+## Please email or call me if you have trouble getting this working.
+
 ## How to get this running on your machine
 - Note: I used Windows to develop and test this
 - Since this uses port 80 for the front end, make sure you are not already using port 80 for something else
