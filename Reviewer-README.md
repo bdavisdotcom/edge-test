@@ -12,7 +12,7 @@
 - in the browser hit 'http://localhost' (port 80)
 - you can use pgAdmin (postgres management app) to inspect the DB -- @ localhost port 5432, 'postgre' user, 'example' password,  'edge_test' database
 - you can use the included Postman collection to hit the API directly (import the included postman collection & environment)
-
+- if you use the postman collection, you must copy / paste the JWT you get back from LOGIN into the environment variable manually. It will expire after 1 hour as well.
 ## List of dev comments
 - I didn't get time to work on css / styles
 - I ran out of time before I could add unit / integration tests
