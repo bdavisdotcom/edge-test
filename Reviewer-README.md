@@ -17,6 +17,7 @@
 - I wrote all of this by hand, manually-- except for bootstrapping the react app so I wouldn't have to write webpack,etc, configs. I referenced the web where needed, as I have used many different languages and tech stack in the last few years--things get lost if not used regularly (used agGrid, used their docs, etc)
 - I didn't get time to work on css / styles
 - I ran out of time before I could add unit / integration tests
+- I ran out of time before I could put documentation together -- will add in the near future
 - field / form validation could use more work, again, I ran out of time
 
 ### In the real world...
