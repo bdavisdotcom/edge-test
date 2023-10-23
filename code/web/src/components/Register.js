@@ -24,19 +24,27 @@ const Register = ({ registerHandler }) => {
         <div className="register">
             <h2>Register</h2>       
             <div>
-                <label>Name</label>
+                <div className='form-col'>
+                    <label>Name</label>
+                </div>
                 <input type="text" value={userName} onChange={(e) => setUserName(e.target.value)} />
             </div>
             <div>
-                <label>Email</label>
+                <div className='form-col'>
+                    <label>Email</label>
+                </div>
                 <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
             </div>
             <div>
-                <label>Password</label>
+                <div className='form-col'>
+                    <label>Password</label>
+                </div>
                 <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
             </div>
             <div>
-                <label>Confirm Password</label>
+                <div className='form-col'>
+                    <label>Confirm Password</label>
+                </div>
                 <input type="password" value={confirmPassowrd} onChange={(e) => setConfirmPassword(e.target.value)} />
             </div>
             <div className='inline-container'>

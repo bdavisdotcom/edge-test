@@ -59,3 +59,8 @@
   display: inline;
   margin: 15px 25px 15px 0px;
 }
+
+.form-col {
+  width: 150px;  
+  margin-top: 10px;
+}

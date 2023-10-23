@@ -26,21 +26,29 @@ const UserProfile = ({ currentUser, profileHandler }) => {
         <div className="profile">
             <h2>User Profile</h2>
             <div>
-                <label>Name</label>
+                <div className='form-col'>
+                    <label>Name</label>
+                </div>
                 <input type="text" value={userName} onChange={(e) => setUserName(e.target.value)} />
             </div>
             <div>
-                <label>Email</label>
+                <div className='form-col'>
+                    <label>Email</label>
+                </div>
                 <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
             </div>
             <div>
-                <label>Profile Image</label>
+                <div className='form-col'>
+                    <label>Profile Image</label>
+                </div>
                 <input type="text" value={profileImage} onChange={(e) => setProfileImage(e.target.value)} />
             </div>
             {
                 currentUser &&
                 <div>
-                    <label>Last Updated</label>
+                    <div className='form-col'>
+                        <label>Last Updated</label>
+                    </div>
                     <label>{(new Date(currentUser.updated_at)).toISOString().split('T')[0]}</label>
                 </div>
             }

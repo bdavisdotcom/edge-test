@@ -138,35 +138,47 @@ const TaskEdit = ({ taskCommandHandler, currentUser, task }) => {
             <div>
                 {
                     task && task.id !== null &&
-                    <div>
-                        <label>ID</label>
-                        <label>{task.id}</label>
+                    <div className='form-col'>
+                        <div>
+                            <label>ID</label>
+                            <label>{task.id}</label>
+                        </div>
                     </div>
                 }
                 <div>
-                    <label>Priority</label>
+                    <div className='form-col'>
+                        <label>Priority</label>
+                    </div>
                     <input type="text" name="priority" value={currentTask.priority} onChange={onTaskChange} />
                     <label className='error'>{formState.priority.msg}</label>
                 </div>
                 <div>
-                    <label>Status</label>
+                    <div className='form-col'>
+                        <label>Status</label>
+                    </div>
                     <select name="status" value={currentTask.status} onChange={onTaskChange}>
                         <option value="OPEN">OPEN</option>
                         <option value="CLOSED">CLOSED</option>
                     </select>
                 </div>
                 <div>
-                    <label>Title</label>
+                    <div className='form-col'>
+                        <label>Title</label>
+                    </div>
                     <input type="text" name="title" value={currentTask.title} onChange={onTaskChange} />
                     <label className='error'>{formState.title.msg}</label>
                 </div>
                 <div>
-                    <label>Description</label>
+                    <div className='form-col'>
+                        <label>Description</label>
+                    </div>
                     <textarea rows={4} name="description" value={currentTask.description} onChange={onTaskChange} />
                     <label className='error'>{formState.description.msg}</label>
                 </div>
                 <div>
-                    <label>Due Date</label>
+                    <div className='form-col'>
+                        <label>Due Date</label>
+                    </div>
                     <input type="datetime-local" name="due_date" value={formatDateForInputControl(dueDate)} onChange={onTaskChange} />
                 </div>
             </div>
