@@ -22,8 +22,40 @@
 - I ran out of time before I could add unit / integration tests -- will add in the near future
 - I ran out of time before I could put documentation together -- will add in the near future
 - field / form validation could use more work, again, I ran out of time -- will add in the near future
+- There are lots of "console.log()" and "console.dir()" which would not go into the wild normally. This is a dev exercise.
+- SO that also means there could be bugs ;)  
 
 ### In the real world...
 - All this should be under HTTPS (this was not done for this test)
 - .env file would not be checked into github -- done it here so reviewer doesn't have to put one together
 - No passwords or other sensitive data should ever be checked into github -- should be put into AWS secrets manager or similar, use AWS API to pull at run time
+
+
+
+### FUN
+    Butler : [Answering door]  Yes?
+
+    Indiana Jones : [Scottish accent]  Not before time! did you intend to leave us standing on the doorstep all day? we're drenched
+
+    [sneezes in butler's face] 
+
+    Indiana Jones : Now look, I've gone and caught a sniffle
+
+    Butler : Are you expected?
+
+    Indiana Jones : Don't take that tone with me my good man! Now buttle off and tell Baron Brunwald that Lord Clarence McDonald and his lovely assistant
+
+    [Drags Elsa towards him] 
+
+    Indiana Jones : are here to view the tapestries
+
+    Butler : Tapestries?
+
+    Indiana Jones : The old man is dense, this is a castle isn't it? there are tapestries
+
+    Butler : This is a castle and we have many tapestries, and if you are a Scottish lord then I am Mickey Mouse!
+
+    Indiana Jones : How dare he?
+
+    [punches butler in face] 
+###
