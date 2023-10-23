@@ -17,7 +17,7 @@
 - if you use the postman collection, you must copy / paste the JWT you get back from LOGIN into the environment variable manually. It will expire after 1 hour as well.
 - if its needed to rebuild the FE react stuff, issue "npm install" and then "npm run build" from the /web folder.
 ## List of dev comments
-- I wrote all of this by hand, manually-- except for bootstrapping the react app so I wouldn't have to write webpack,etc, configs. I referenced the web where needed, as I have used many different languages and tech stack in the last few years--things get lost if not used regularly (used agGrid, used their docs, etc). See github commits for the progression.
+- I wrote all of this by hand, manually, starting on Oct 17 (see commit history) -- except for bootstrapping the react app so I wouldn't have to write webpack,etc, configs. I referenced the web where needed, as I have used many different languages and tech stack in the last few years--things get lost if not used regularly (used agGrid, used their docs, etc). See github commits for the progression.
 - I didn't get time to work on css / styles
 - I ran out of time before I could add unit / integration tests -- will add in the near future
 - I ran out of time before I could put documentation together -- will add in the near future
