@@ -15,6 +15,8 @@
 
 ## List of dev comments
 - I didn't get time to work on css / styles
+- I ran out of time before I could add unit / integration tests
+- field / form validation could use more work, again, I was against time constraints
 
 ### In the real world...
 - All this should be under HTTPS (this was not done for this test)
