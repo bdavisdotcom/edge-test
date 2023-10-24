@@ -13,7 +13,8 @@
 - Install NodeJs ver 18.x.x
 - Install Docker Desktop (VM was WSL)
 - From this repo's /code folder (where the docker-compose.yaml file is located)
-    Run the command "docker-compose up"
+    Run the command "docker-compose up". Wait for the containers to fully start up
+- First run may take a bit, since there are DB migrations, etc that need to run the first time.
 - Browser cookies must be enabled for this to work correctly
 - tested in Chrome & Firefox
 - in the browser hit 'http://localhost' (port 80)
