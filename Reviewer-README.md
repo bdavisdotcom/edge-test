@@ -22,6 +22,7 @@
 - if you use the postman collection, you must copy / paste the JWT you get back from LOGIN into the environment variable manually. It will expire after 1 hour as well.
 
 ## List of dev comments / Caveats
+- Scroll to the right of the grid to see the "edit/delete" buttons
 - I wrote all of this by hand, manually, starting on Oct 17 (see commit history) -- except for bootstrapping the react app so I wouldn't have to write webpack,etc, configs. I referenced the web where needed, as I have used many different languages and tech stacks in the last few years--things get lost if not used regularly (I used agGrid, used their docs, etc). See github commits for the progression.
 - I didn't get time to work on css / styles
 - I ran out of time before I could add unit / integration tests
