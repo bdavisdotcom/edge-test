@@ -32,7 +32,7 @@ services:
       - |
         npm install
         npm run migrate
-        npm run start
+        node ./app.js
 
     # command: /bin/sh -c "./startup_script.sh"
 
