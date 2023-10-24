@@ -4,7 +4,7 @@
 
 ##
 - there are 3 parts/ docker containers
-  - web the nginx web server (with proxy pass-thru to the back end API)
+  - web the nginx web server (with proxy pass-thru to the back end API) and react front end code
   - server the nodejs API
   - db the postgres database
 ## How to get this running on your machine
