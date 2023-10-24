@@ -26,7 +26,15 @@ services:
       - ./server:/home/server
     ports:
       - "8080:8080"
-    command: /bin/sh -c "./startup_script.sh"
+    command:
+      - /bin/sh
+      - -c
+      - |
+        npm install
+        npm run migrate
+        npm run start
+
+    # command: /bin/sh -c "./startup_script.sh"
 
   web:
     image: nginx
