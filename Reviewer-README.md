@@ -2,6 +2,11 @@
 
 ## Please email or call me if you have trouble getting this working.
 
+##
+- there are 3 parts/ docker containers
+  - web the nginx web server (with proxy pass-thru to the back end API)
+  - server the nodejs API
+  - db the postgres database
 ## How to get this running on your machine
 - Note: I used Windows to develop and test this
 - Since this uses port 80 for the front end, make sure you are not already using port 80 for something else
@@ -15,7 +20,7 @@
 - you can use pgAdmin (postgres management app) to inspect the DB -- @ localhost port 5432, 'postgre' user, 'example' password,  'edge_test' database
 - you can use the included Postman collection to hit the API directly (import the included postman collection & environment)
 - if you use the postman collection, you must copy / paste the JWT you get back from LOGIN into the environment variable manually. It will expire after 1 hour as well.
-- if its needed to rebuild the FE react stuff, issue "npm install" and then "npm run build" from the /web folder.
+
 ## List of dev comments / Caveats
 - I wrote all of this by hand, manually, starting on Oct 17 (see commit history) -- except for bootstrapping the react app so I wouldn't have to write webpack,etc, configs. I referenced the web where needed, as I have used many different languages and tech stacks in the last few years--things get lost if not used regularly (I used agGrid, used their docs, etc). See github commits for the progression.
 - I didn't get time to work on css / styles
