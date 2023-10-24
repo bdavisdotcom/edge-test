@@ -16,11 +16,12 @@
 - you can use the included Postman collection to hit the API directly (import the included postman collection & environment)
 - if you use the postman collection, you must copy / paste the JWT you get back from LOGIN into the environment variable manually. It will expire after 1 hour as well.
 - if its needed to rebuild the FE react stuff, issue "npm install" and then "npm run build" from the /web folder.
-## List of dev comments
+## List of dev comments / Caveats
 - I wrote all of this by hand, manually, starting on Oct 17 (see commit history) -- except for bootstrapping the react app so I wouldn't have to write webpack,etc, configs. I referenced the web where needed, as I have used many different languages and tech stacks in the last few years--things get lost if not used regularly (I used agGrid, used their docs, etc). See github commits for the progression.
 - I didn't get time to work on css / styles
 - I ran out of time before I could add unit / integration tests
 - I ran out of time before I could put documentation together
+- I didn't get around to the user profile image
 - field / form validation could use more work, again, I ran out of time
 - There are lots of "console.log()" and "console.dir()" which would not go into the wild normally. This is a dev exercise.
 - SO that also means there could be bugs ;)  
