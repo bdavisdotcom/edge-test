@@ -4,9 +4,9 @@
 
 ##
 - there are 3 parts/ docker containers
-  - web: the nginx web server (with proxy pass-thru to the back end API) and react front end code
-  - server: the nodejs API
-  - db: the postgres database
+  - web- the nginx web server (with proxy pass-thru to the back end API) and react front end code
+  - server- the nodejs API
+  - db- the postgres database
 ## How to get this running on your machine
 - Note: I used Windows to develop and test this
 - Since this uses port 80 for the front end, make sure you are not already using port 80 for something else
