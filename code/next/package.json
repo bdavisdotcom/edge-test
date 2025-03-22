@@ -19,6 +19,7 @@
         "react-dom": "^18",
         "react-hook-form": "^7.51.0",
         "react-quill": "^2.0.0",
+        "react-svg": "^16.1.33",
         "universal-cookie": "^7.1.4",
         "yup": "^1.4.0"
     },

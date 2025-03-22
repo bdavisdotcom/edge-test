@@ -27,3 +27,12 @@ export function createSession(token: string, cookieHeader?: string) {
   });
 }
 
+export function destroySession(cookieHeader?: string) {
+  const cookies = new Cookies(cookieHeader ?? null, { path: "/" });
+  return cookies.remove("session");
+}
+
+export function getSession(cookieHeader?: string): Session | undefined {
+  const cookie = getToken(cookieHeader);
+  return cookie ? jwtDecode<Session>(cookie) : undefined;
+}

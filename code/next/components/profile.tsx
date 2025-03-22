@@ -5,10 +5,12 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect } from "react";
+import { User } from "@/lib/types";
 
 type Props = {
     registerMode: boolean;
     onSubmit: any;
+    user?: User | undefined | null;
 }
 
 const register = {
@@ -23,12 +25,23 @@ const update = {
     email: yup.string().required().label("Email"),
 };
 
-export function Profile({ registerMode, onSubmit }: Props) {
+export function Profile({ registerMode, onSubmit, user }: Props) {
 
     const schema = yup.object(registerMode ? register : update);
 
+    function getDefaultValues() {
+        if (user) {
+            return user;
+        } else {
+            return {
+                email: "",
+                name: "",
+            }
+        }
+    }
+
     const form = useForm<yup.InferType<typeof schema>>({
-        defaultValues: { email: "" },
+        defaultValues: getDefaultValues(),
         resolver: yupResolver(schema),
         mode: "onChange",
       });

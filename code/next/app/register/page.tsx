@@ -2,12 +2,14 @@
 
 
 import { createSession } from "@/lib/session";
-import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
-import { Profile } from "@/components/profile";
+import { Button } from "@/components/button";
+import { H1 } from "@/components/h1";
+import { TextInputGroup } from "@/components/text-input-group";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 type RegisterParams = {
   name: string;
@@ -15,9 +17,24 @@ type RegisterParams = {
   password: string;
 };
 
+const fieldSchema = {
+    name: yup.string().required().label("Name"),
+    email: yup.string().required().label("Email"),
+    password: yup.string().required().label("Password"),
+    confirmPassword: yup.string().oneOf([yup.ref("password"), undefined], "Passwords must match").required().label("Confirm Password")
+};
+
 export default function Register() {
   const router = useRouter();
-  const [error, setError] = useState<string>("");
+  const schema = yup.object(fieldSchema);
+
+  const form = useForm<yup.InferType<typeof schema>>({
+    defaultValues: { name: "", email: "", password: "", confirmPassword: "" },
+    resolver: yupResolver(schema),
+    mode: "onChange",
+  });
+  
+  const { errors } = form.formState;
 
   const onSubmit = async (data: RegisterParams) => {
     let token = "";
@@ -30,24 +47,52 @@ export default function Register() {
     } catch (error: any) {
       const data = error.response?.data;
       msg = data.message;
+
       console.dir(data);
       token = "";
     }
 
     if (!token) {
-      setError(msg || "Unable to login. Please ensure your email and password are correct.");
+      form.setError("root", { type: "custom", message: "Unable to login. Please ensure your email and password are correct" });
     } else {
         router.push("/");
     }
   };
 
   return (
-    <div>
-      <Profile registerMode={true} onSubmit={onSubmit} />
-      {error && (
-        <p className="text-orange text-sm font-medium mb-2">
-          {error}
-        </p>)}
+    <div className="grid justify-items-center p-6">
+      <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="max-w-[480px] gap-2.5 flex flex-col mb-24 w-full"
+          >
+          <div className="border-b border-b-white mb-10">
+              <H1 className="mb-2 text-center">Register</H1>
+          </div>
+
+          <TextInputGroup type="text" label="Name" name="name" form={form} />
+          <TextInputGroup type="email" label="Email" name="email" form={form} />
+
+          <TextInputGroup
+              type="password"
+              label="Password"
+              name="password"
+              form={form}
+          />
+          <TextInputGroup
+              type="password"
+              label="Confirm Password"
+              name="confirmPassword"
+              form={form}
+          />
+
+          {errors.root && (
+              <p className="text-orange text-sm font-medium mb-2">
+              {errors.root.message}
+              </p>
+          )}
+
+          <Button priority="primary" size="large">Register</Button>
+      </form>
     </div>
     
   );

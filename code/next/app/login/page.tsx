@@ -1,5 +1,4 @@
 "use client";
-
 import { Button } from "@/components/button";
 import { H1 } from "@/components/h1";
 import { TextInputGroup } from "@/components/text-input-group";
@@ -9,6 +8,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
+import { useUserContext } from "@/components/user-context";
 
 type LoginParams = {
   email: string;
@@ -21,6 +21,7 @@ export const schema = yup.object({
 });
 
 export default function Login() {
+  const { currentUser, setCurrentUser } = useUserContext();
   const router = useRouter();
   const form = useForm<yup.InferType<typeof schema>>({
     defaultValues: { email: "", password: "" },
@@ -33,7 +34,9 @@ export default function Login() {
     try {
       const response = await axios.post("/api/auth/login", data);
       token = response.data?.user?.jwt;
+      const user = response.data?.user;
       createSession(token);
+      setCurrentUser(user);
     } catch (error) {
       console.log(error);
       token = "";

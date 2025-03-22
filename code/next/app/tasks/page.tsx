@@ -9,19 +9,21 @@ import axios from "axios";
 
 import { Button } from "@/components/button";
 import { Grid } from "@/components/grid";
-// import { Employer } from "@/lib/types";
+import { Task } from "@/lib/types";
 import { useRouter } from "next/navigation";
-// import { useOverlay } from "@/components/overlays-provider";
-// import { useEmployer } from "@/lib/api-hooks/employer";
+import { useOverlay } from "@/components/overlays/overlays-provider";
 import { AgGridReact } from "@ag-grid-community/react";
 
-function Tasks() {
+const displayDateFormater = (params: any) => {
+  return (new Date(params.value)).toLocaleString();
+}
+
+export default function Tasks() {
   const grid = useRef<AgGridReact>(null);
   const router = useRouter();
-  const { destroy } = useEmployer();
   const { confirm, notify } = useOverlay();
 
-  const deleteEmployer = async (id: number, text: string) => {
+  const deleteTask = async (id: string, text: string) => {
     const didConfirm = await confirm(
       <>
         Are you sure you want to delete
@@ -31,12 +33,13 @@ function Tasks() {
     );
 
     if (didConfirm) {
-      destroy(id, {
-        onSuccess: () => {
-          grid.current?.api?.refreshInfiniteCache();
-          notify("Employer removed", `Successfully deleted ${text}`);
-        },
-      });
+      console.log("DESTROY TASK");
+      // destroy(id, {
+      //   onSuccess: () => {
+      //     grid.current?.api?.refreshInfiniteCache();
+      //     notify("Employer removed", `Successfully deleted ${text}`);
+      //   },
+      // });
     }
   };
 
@@ -52,82 +55,85 @@ function Tasks() {
     }
 
     try {
-      const response = await axios.get("/api/admin/employers", {
-        params: {
-          take: endRow - startRow,
-          skip: startRow,
-          orderCol,
-          orderDir,
-          search: context.search || undefined,
-        },
-      });
-      const { employers, count } = response.data.data;
+      const response = await axios.get(`/api/tasks?sort=${orderCol}&direction=${orderDir}`);
 
-      params.successCallback(employers, count);
+      params.successCallback(response.data?.tasks || [], response.data?.tasks?.length || 0);
     } catch (error) {
       params.successCallback([], 0);
     }
   }, []);
 
-  const colDefs: ColDef<Employer>[] = [
+  const colDefs: ColDef<Task>[] = [
     {
-      headerName: "Employer ID",
-      field: "hostBusinessId",
+      headerName: "ID",
+      field: "id",
       width: 100,
       cellClass: "underline font-medium cursor-pointer",
-      onCellClicked: ({ data }) =>
-        data && router.push(`/admin/employers/${data.hostBusinessId}`),
     },
     {
-      headerName: "Host Business",
-      field: "businessName",
+      headerName: "Priority",
+      field: "priority",
       cellClass: "cursor-pointer",
       cellClassRules: { underline: ({ value }) => value },
-      valueFormatter: ({ value }) => value || "—",
-      onCellClicked: ({ data }) =>
-        data && router.push(`/admin/employers/${data.hostBusinessId}`),
+      width: 80,
     },
     {
-      headerName: "Point of Contact",
-      valueFormatter: ({ data }) => {
-        return data && data.pocLastName
-          ? `${data.pocLastName}, ${data.pocFirstName}`
-          : "—";
-      },
-      field: "pocLastName",
-      flex: 1,
+      headerName: "Status",
+      field: "status",
+      width: 80,
     },
     {
-      headerName: "Active",
-      valueGetter: ({ data }) => data?.jobListings.length,
-      sortable: false,
+      headerName: "Due Date",
+      field: "due_date",
       cellClass: "underline justify-center cursor-pointer",
       headerClass: "justify-center",
       width: 80,
-      onCellClicked: ({ data }) =>
-        data &&
-        router.push(
-          `/admin/employers/${data.hostBusinessId}/internship-postings`
-        ),
+      valueFormatter: displayDateFormater,
     },
     {
+      headerName: "Title",
+      field: "title",
+      cellClass: "justify-center",
+      headerClass: "justify-center",
+      width: 80,
+    },    
+    {
+      headerName: "Description",
+      field: "description",
+      cellClass: "justify-center",
+      headerClass: "justify-center",
+      width: 80,
+    },        
+    {
+      headerName: "Updated",
+      field: "updated_at",
+      cellClass: "justify-center",
+      headerClass: "justify-center",
+      width: 80,
+      valueFormatter: displayDateFormater,
+    },        
+    {
+      headerName: "Created",
+      field: "created_at",
+      cellClass: "justify-center",
+      headerClass: "justify-center",
+      width: 80,
+      valueFormatter: displayDateFormater,
+    },                
+    {
       headerName: "Manage",
-      cellRenderer: ({ data }: ICellRendererParams<Employer>) =>
+      cellRenderer: ({ data }: ICellRendererParams<Task>) =>
         data && (
           <div className="flex justify-between flex-1">
             <Button
-              priority="underline"
-              iconLeft="trash"
               onClick={() =>
-                deleteEmployer(data.hostBusinessId, data.businessName)
+                deleteTask(data.id, data.title)
               }
             >
               Delete
             </Button>
             <Button
-              priority="underline"
-              iconLeft="pen"
-              href={`/admin/employers/${data.hostBusinessId}`}
+              href={`/tasks/${data.id}`}
             >
               Edit
             </Button>
@@ -144,6 +150,3 @@ function Tasks() {
     </div>
   );
 }
-
-export { EmployerList };
-export default EmployerList;

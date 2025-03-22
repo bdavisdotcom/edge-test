@@ -1,6 +1,6 @@
 import { ComponentProps } from "react";
 import { twMerge } from "tailwind-merge";
-// import Icon, { IconName } from "../text/icon";
+import Icon, { IconName } from "@/components/icon";
 import { useRouter } from "next/navigation";
 
 type Priority = "primary" | "secondary" | "default" | "underline";
@@ -10,8 +10,8 @@ type Props = {
   priority?: Priority;
   dark?: boolean;
   size?: "default" | "large";
-//   iconLeft?: IconName;
-//   iconRight?: IconName;
+  iconLeft?: IconName;
+  iconRight?: IconName;
   href?: string;
 } & ComponentProps<"button">;
 
@@ -20,8 +20,8 @@ function Button({
   dark = false,
   priority = "default",
   size = "default",
-//   iconLeft,
-//   iconRight,
+  iconLeft,
+  iconRight,
   children,
   loading,
   href,
@@ -66,24 +66,24 @@ function Button({
       {...props}
       disabled={disabled}
     >
-      {/* {iconLeft &&
+      {iconLeft &&
         (priority === "primary" && size === "default" ? (
           <div className="bg-gold -ml-[20px] self-stretch -my-2.5 px-3 flex items-center rounded-l mr-1">
             <Icon name={iconLeft} className="fill-white" />
           </div>
         ) : (
           <Icon name={iconLeft} className={iconVariant} />
-        ))} */}
+        ))}
       {loading && (
         <div className="absolute h-full w-full flex items-center justify-center">
-          {/* <Icon name="spinner" className="animate-spin h-5 w-5" /> */}
+          <Icon name="spinner" className="animate-spin h-5 w-5" />
           Loading...
         </div>
       )}
       <span className={twMerge(loading && "text-[transparent]")}>
         {children}
       </span>
-      {/* {iconRight && <Icon name={iconRight} className={iconVariant} />} */}
+      {iconRight && <Icon name={iconRight} className={iconVariant} />}
     </button>
   );
 }
