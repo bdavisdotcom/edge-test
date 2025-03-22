@@ -10,7 +10,7 @@ import {
   useEffect,
 } from "react";
 import { User } from "@/lib/types";
-import { getSession } from "@/lib/session";
+import { destroySession, getSession } from "@/lib/session";
 
 export type UserContextType = {
     currentUser: User | null;
@@ -33,7 +33,7 @@ export function UserContextProvider({ children }: { children: ReactNode }) {
     const [currentUser, setCurrentUser] = useState<User | null>(null);
 
     useEffect(() => {
-        console.log("layout Use effect run...");
+        console.log("User context layout Use effect run...");
         const session = getSession();
         if (!session || currentUser) {
             return;
@@ -47,6 +47,8 @@ export function UserContextProvider({ children }: { children: ReactNode }) {
             setCurrentUser(user);
         }, (err) => {
             console.log("No user found");
+            setCurrentUser(null);
+            destroySession();
         });
     }, []);
 

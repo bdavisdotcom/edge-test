@@ -1,5 +1,5 @@
 "use client";
-import { useCallback, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import {
   ICellRendererParams,
   ColDef,
@@ -13,15 +13,26 @@ import { Task } from "@/lib/types";
 import { useRouter } from "next/navigation";
 import { useOverlay } from "@/components/overlays/overlays-provider";
 import { AgGridReact } from "@ag-grid-community/react";
+import { useUserContext } from "@/components/user-context";
+import { getSession } from "@/lib/session";
 
 const displayDateFormater = (params: any) => {
   return (new Date(params.value)).toLocaleString();
 }
 
 export default function Tasks() {
+  const { currentUser } = useUserContext();
   const grid = useRef<AgGridReact>(null);
   const router = useRouter();
   const { confirm, notify } = useOverlay();
+
+  useEffect(() => {
+    const session = getSession();
+    if (!session) {
+      return router.push("/");
+    }
+  }, []);
+
 
   const deleteTask = async (id: string, text: string) => {
     const didConfirm = await confirm(

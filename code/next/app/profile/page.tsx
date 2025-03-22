@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -10,6 +10,7 @@ import { TextInputGroup } from "@/components/text-input-group";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { User } from "@/lib/types";
 import { useUserContext } from "@/components/user-context";
+import { getSession } from "@/lib/session";
 
 type ProfileParams = {
   name: string;
@@ -33,6 +34,13 @@ export default function Profile() {
   });
     
   const { errors } = form.formState;
+
+  useEffect(() => {
+    const session = getSession();
+    if (!session) {
+      return router.push("/");
+    }
+  }, []);
 
   const onSubmit = async (data: ProfileParams) => {
     let token = "";
@@ -59,7 +67,7 @@ export default function Profile() {
           className="max-w-[480px] gap-2.5 flex flex-col mb-24 w-full"
           >
           <div className="border-b border-b-white mb-10">
-              <H1 className="mb-2 text-center">Register</H1>
+              <H1 className="mb-2 text-center">Update Profile</H1>
           </div>
 
           <TextInputGroup type="text" label="Name" name="name" form={form} />
@@ -71,7 +79,7 @@ export default function Profile() {
               </p>
           )}
 
-          <Button priority="primary" size="large">Register</Button>
+          <Button priority="primary" size="large">Update</Button>
       </form>
     </div>
     

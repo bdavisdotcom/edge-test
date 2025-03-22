@@ -10,6 +10,7 @@ import { Button } from "@/components/button";
 import { H1 } from "@/components/h1";
 import { TextInputGroup } from "@/components/text-input-group";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useUserContext } from "@/components/user-context";
 
 type RegisterParams = {
   name: string;
@@ -25,6 +26,7 @@ const fieldSchema = {
 };
 
 export default function Register() {
+  const { setCurrentUser } = useUserContext();
   const router = useRouter();
   const schema = yup.object(fieldSchema);
 
@@ -44,6 +46,7 @@ export default function Register() {
       console.dir(response);
       token = response.data?.user?.jwt;
       createSession(token);
+      setCurrentUser(response.data?.user);
     } catch (error: any) {
       const data = error.response?.data;
       msg = data.message;

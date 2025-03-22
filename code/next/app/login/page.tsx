@@ -21,7 +21,7 @@ export const schema = yup.object({
 });
 
 export default function Login() {
-  const { currentUser, setCurrentUser } = useUserContext();
+  const { setCurrentUser } = useUserContext();
   const router = useRouter();
   const form = useForm<yup.InferType<typeof schema>>({
     defaultValues: { email: "", password: "" },

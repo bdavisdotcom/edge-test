@@ -4,7 +4,7 @@ import "./globals.css";
 import axios from "axios";
 import { TopNav } from "@/components/top-nav";
 import { LeftNav } from "@/components/left-nav";
-import { UserContext, UserContextType } from "@/components/user-context";
+import { UserContext, UserContextType, UserContextProvider } from "@/components/user-context";
 import { useEffect, useState } from "react";
 import { User } from "@/lib/types";
 import { getSession } from "@/lib/session";
@@ -15,30 +15,10 @@ export default function RootLayout({
     children: React.ReactNode
   }) {
 
-    // const [currentUser, setCurrentUser] = useState<User | null>(null);
-
-    // useEffect(() => {
-    //     console.log("layout Use effect run...");
-    //     const session = getSession();
-    //     if (!session || currentUser) {
-    //         return;
-    //     }
-
-    //     console.dir({session, currentUser});
-
-    //     console.log("*** Load profile from cookie");
-    //     axios.get("/api/user").then((response) => {
-    //         const user = response.data?.user;
-    //         setCurrentUser(user);
-    //     }, (err) => {
-    //         console.log("No user found");
-    //     });
-    // }, []);
-
     return (
         <html lang="en">
             <body className="flex flex-col h-screen overflow-hidden">
-                {/* <UserContext.Provider value={{ currentUser, setCurrentUser }}> */}
+                <UserContextProvider>
                     <header className="bg-indigo-800">
                         <TopNav />
                     </header>
@@ -52,7 +32,7 @@ export default function RootLayout({
                             </div>                        
                         </main>
                     </div>
-                {/* </UserContext.Provider> */}
+                </UserContextProvider>
             </body>
         </html>
     );
