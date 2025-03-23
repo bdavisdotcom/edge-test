@@ -10,7 +10,8 @@ import { Button } from "@/components/button";
 import { H1 } from "@/components/h1";
 import { TextInputGroup } from "@/components/text-input-group";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useUserContext } from "@/components/user-context";
+import { UserContext } from "@/components/user-context";
+import { useContext } from "react";
 
 type RegisterParams = {
   name: string;
@@ -26,7 +27,7 @@ const fieldSchema = {
 };
 
 export default function Register() {
-  const { setCurrentUser } = useUserContext();
+  const { setCurrentUser } = useContext(UserContext);
   const router = useRouter();
   const schema = yup.object(fieldSchema);
 

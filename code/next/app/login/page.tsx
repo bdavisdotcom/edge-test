@@ -8,7 +8,8 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
-import { useUserContext } from "@/components/user-context";
+import { UserContext } from "@/components/user-context";
+import { useContext } from "react";
 
 type LoginParams = {
   email: string;
@@ -21,7 +22,7 @@ export const schema = yup.object({
 });
 
 export default function Login() {
-  const { setCurrentUser } = useUserContext();
+  const { setCurrentUser } = useContext(UserContext);
   const router = useRouter();
   const form = useForm<yup.InferType<typeof schema>>({
     defaultValues: { email: "", password: "" },

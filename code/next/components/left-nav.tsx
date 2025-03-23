@@ -1,11 +1,12 @@
 'use client'
 
 import { useRouter } from "next/navigation";
-import { useUserContext } from "./user-context";
+import { useContext } from "react";
+import { UserContext } from "./user-context";
 import { getSession } from "@/lib/session";
 
 export function LeftNav() {
-    const { currentUser } = useUserContext();
+    const { currentUser } = useContext(UserContext);
     const router = useRouter();
 
     const session = getSession();

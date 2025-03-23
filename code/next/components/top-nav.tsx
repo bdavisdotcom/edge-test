@@ -1,11 +1,12 @@
 'use client'
 
+import { useContext } from "react";
 import { useRouter } from "next/navigation";
-import { useUserContext } from "./user-context";
+import { UserContext } from "./user-context";
 import { destroySession } from "@/lib/session";
 
 export function TopNav() {
-    const { currentUser, setCurrentUser } = useUserContext();
+    const { currentUser, setCurrentUser } = useContext(UserContext);
     const router = useRouter();
 
     function logout() {

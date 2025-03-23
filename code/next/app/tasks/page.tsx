@@ -1,5 +1,5 @@
 "use client";
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useContext } from "react";
 import {
   ICellRendererParams,
   ColDef,
@@ -13,7 +13,7 @@ import { Task } from "@/lib/types";
 import { useRouter } from "next/navigation";
 import { useOverlay } from "@/components/overlays/overlays-provider";
 import { AgGridReact } from "@ag-grid-community/react";
-import { useUserContext } from "@/components/user-context";
+import { UserContext } from "@/components/user-context";
 import { getSession } from "@/lib/session";
 
 const displayDateFormater = (params: any) => {
@@ -21,7 +21,7 @@ const displayDateFormater = (params: any) => {
 }
 
 export default function Tasks() {
-  const { currentUser } = useUserContext();
+  const { currentUser } = useContext(UserContext);
   const grid = useRef<AgGridReact>(null);
   const router = useRouter();
   const { confirm, notify } = useOverlay();
@@ -158,6 +158,7 @@ export default function Tasks() {
   return (
     <div className="ag-theme-alpine ag-style">
       <Grid ref={grid} getRows={getRows} columnDefs={colDefs} />
+      <Button priority="primary" size="large" onClick={() => router.push("/tasks/new")}>Add Task</Button>
     </div>
   );
 }
