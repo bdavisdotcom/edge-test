@@ -29,7 +29,6 @@ export function UserContextProvider({ children }: { children: ReactNode }) {
 
         axios.get("/api/user").then((response) => {
             const user = response.data?.user;
-            console.log("Load profile from API");
             setCurrentUser(user);
         }, (err) => {
             console.log("No user found");
