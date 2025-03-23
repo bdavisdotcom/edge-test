@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="20.000019"
+   height="19.992077"
+   viewBox="0 0 20.000019 19.992077"
+   version="1.1"
+   id="svg1"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   fill="#41416e">
+  <defs
+     id="defs1" />
+  <g
+     id="magicoon-Bold"
+     transform="translate(-204.99999,-1748.0079)">
+    <g
+       id="home-Bold"
+       transform="translate(203,1746)">
+      <path
+         id="home-Bold_1_"
+         d="m 223.135,1753.122 -5,-4.019 a 5.035,5.035 0 0 0 -6.27,0 l -5,4.019 a 4.972,4.972 0 0 0 -1.865,3.892 v 5.992 a 5,5 0 0 0 5,4.994 h 3 v -5 a 2,2 0 0 1 4,0 v 5 h 3 a 5,5 0 0 0 5,-4.994 v -5.992 a 4.973,4.973 0 0 0 -1.865,-3.892 z m -0.135,9.884 a 3,3 0 0 1 -3,2.994 h -1 v -2.995 a 4,4 0 0 0 -8,0 V 1766 h -1 a 3,3 0 0 1 -3,-2.994 v -5.992 a 2.982,2.982 0 0 1 1.118,-2.333 l 5,-4.019 a 3.024,3.024 0 0 1 3.764,0 l 5,4.019 a 2.98,2.98 0 0 1 1.119,2.333 v 5.992 z"
+         transform="translate(-203,-1746)" />
+    </g>
+  </g>
+</svg>

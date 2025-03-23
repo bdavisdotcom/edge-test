@@ -17,10 +17,12 @@ module.exports = {
         });     
     },
 
-    get: (req, res, next) => {
+    get: async (req, res, next) => {
         const { id } = req.params;
+        const user = res.locals.user;
+        const task = await tasks.getTaskById(id, user.id);
 
-        res.json({ status: "OK" });   
+        res.json({ status: "OK", task });   
     },
 
     create: (req, res, next) => {

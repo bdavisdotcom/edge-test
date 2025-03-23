@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.ag-theme-alpine {
+  --ag-odd-row-background-color: transparent !important;
+  --ag-row-hover-color: transparent !important;
+  --ag-foreground-color: theme(colors.darkblue) !important;
+  --ag-font-size: 1rem !important;
+  --ag-borders: none !important;
+  --ag-border-radius: 0 !important;
+  --ag-header-background-color: transparent !important;
+  --ag-font-family: inherit !important;
+  --ag-border-color: theme(colors.lightblue) !important;
+  --ag-range-selection-border-color: transparent !important;
+}
+
+.ag-row {
+  @apply border-b-0 !important;
+}
+
+.ag-row-even {
+  @apply bg-offwhite !important;
+}
+
+.ag-cell {
+  @apply flex items-center !important;
+}
+
+.ag-header {
+  @apply border-y border-y-lightblue border-solid !important;
+}
+
+.ag-header-no-border .ag-header {
+  @apply border-t-0 !important;
+}
+
+.ag-header-row {
+  @apply font-medium uppercase !important;
+}
+
+.ag-header-cell-label {
+  justify-content: inherit;
+  @apply items-end !important;
+}
+
+.ag-header-cell-comp-wrapper {
+  justify-content: inherit;
+}
+
+.ag-cell-label-container {
+  justify-content: inherit !important;
+  @apply pb-3 pt-0 !important;
+}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  display: none;
+}

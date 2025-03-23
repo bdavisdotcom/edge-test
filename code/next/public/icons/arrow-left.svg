@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="19.999817"
+   height="16.000002"
+   viewBox="0 0 19.999817 16.000002"
+   version="1.1"
+   id="svg1"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   fill="#41416e">
+  <defs
+     id="defs1" />
+  <g
+     id="magicoon-Bold"
+     transform="translate(-877.00018,-1750.0123)">
+    <g
+       id="arrow-left-Bold"
+       transform="translate(875,1746)">
+      <path
+         id="arrow-left-Bold_1_"
+         d="m 897,1758 a 1,1 0 0 1 -1,1 h -15.586 l 5.293,5.293 a 1,1 0 1 1 -1.414,1.414 l -7,-7 a 1,1 0 0 1 0,-1.414 l 7,-7 a 1,1 0 0 1 1.414,1.414 L 880.414,1757 H 896 a 1,1 0 0 1 1,1 z"
+         transform="translate(-875,-1746)"
+          />
+    </g>
+  </g>
+</svg>
