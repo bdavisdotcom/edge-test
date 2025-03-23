@@ -36,19 +36,6 @@ services:
 
     # command: /bin/sh -c "./startup_script.sh"
 
-  # web:
-  #   image: nginx
-  #   depends_on:
-  #     - db
-  #     - server
-  #   ports:
-  #     - "80:80"
-  #   volumes:
-  #     - ./web/build:/home/www
-  #     - ./web/conf/nginx.conf:/etc/nginx/nginx.conf
-  #     - ./web/conf/proxy.conf:/etc/nginx/proxy.conf
-
-
   next:
     image: "node:18-alpine"
     user: "node"
