@@ -1,13 +1,11 @@
 "use client"
 
 import "./globals.css";
-import axios from "axios";
+import "react-datepicker/dist/react-datepicker.css";
 import { TopNav } from "@/components/top-nav";
 import { LeftNav } from "@/components/left-nav";
-import { UserContext, UserContextType, UserContextProvider } from "@/components/user-context";
-import { useEffect, useState } from "react";
-import { User } from "@/lib/types";
-import { getSession } from "@/lib/session";
+import { UserContextProvider } from "@/components/user-context";
+import { OverlaysProvider } from "@/components/overlays/overlays-provider";
 
 export default function RootLayout({
     children,
@@ -28,7 +26,9 @@ export default function RootLayout({
                         </div>
                         <main role="main" className="w-full h-full flex-grow p-4 overflow-auto">
                             <div className="rounded-xl bg-gray-100">
-                                {children}
+                                <OverlaysProvider>
+                                    {children}
+                                </OverlaysProvider>                                
                             </div>                        
                         </main>
                     </div>

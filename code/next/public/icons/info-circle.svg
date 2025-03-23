@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg id="info-circle-Bold" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+  viewBox="0 0 24 24" fill="#6798cc">
+  <rect id="Path" width="24" height="24" fill="rgba(255,255,255,0)" />
+  <path id="info-circle-Bold_1_"
+    d="M359,1820a10,10,0,1,0,10,10A10.011,10.011,0,0,0,359,1820Zm0,18a8,8,0,1,1,8-8A8.009,8.009,0,0,1,359,1838Zm1-12a1,1,0,1,1-1-1A1,1,0,0,1,360,1826Zm0,4v4a1,1,0,0,1-2,0v-4a1,1,0,0,1,2,0Z"
+    transform="translate(-347 -1818)" />
+</svg>

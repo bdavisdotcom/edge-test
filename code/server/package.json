@@ -16,7 +16,7 @@
         "express-jwt": "^8.4.1",
         "express-openapi-validator": "^5.0.6",
         "ley": "^0.8.1",
-        "postgres": "^3.4.0",
+        "postgres": "^3.4.5",
         "uuid": "^9.0.1"
     }
 }

@@ -42,9 +42,9 @@ function Button({
   const disabled = props.disabled || loading;
 
   const iconVariants = {
-    primary: "fill-black",
-    secondary: dark ? "fill-yellow" : "fill-black",
-    default: "fill-black",
+    primary: "fill-white",
+    secondary: dark ? "fill-yellow" : "fill-white",
+    default: "fill-white",
     underline: "fill-darkblue",
   };
 

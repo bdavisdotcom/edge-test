@@ -1,36 +1,36 @@
 import { ComponentProps } from "react";
 import { ReactSVG } from "react-svg";
 
-export type IconName = string;
-// export type IconName =
-//   | "arrow-left"
-//   | "arrow-right"
-//   | "bell"
-//   | "calendar"
-//   | "chevron-down"
-//   | "chevron-up"
-//   | "check-circle"
-//   | "copy"
-//   | "envelope"
-//   | "eye"
-//   | "eye-slash"
-//   | "flag"
-//   | "info-circle"
-//   | "home"
-//   | "lock"
-//   | "map"
-//   | "menu"
-//   | "pen"
-//   | "plus"
-//   | "plus-square"
-//   | "sort-ascending"
-//   | "sort-descending"
-//   | "search"
-//   | "spinner"
-//   | "three-musketeers"
-//   | "trash"
-//   | "user"
-//   | "users";
+// export type IconName = string;
+export type IconName =
+  | "arrow-left"
+  | "arrow-right"
+  | "bell"
+  | "calendar"
+  | "chevron-down"
+  | "chevron-up"
+  | "check-circle"
+  | "copy"
+  | "envelope"
+  | "eye"
+  | "eye-slash"
+  | "flag"
+  | "info-circle"
+  | "home"
+  | "lock"
+  | "map"
+  | "menu"
+  | "pen"
+  | "plus"
+  | "plus-square"
+  | "sort-ascending"
+  | "sort-descending"
+  | "search"
+  | "spinner"
+  | "three-musketeers"
+  | "trash"
+  | "user"
+  | "users";
 
 type Props = {
   name: IconName;
@@ -42,7 +42,7 @@ function Icon({ name, containerClassName, className, ...props }: Props) {
   return (
     <ReactSVG
       className={containerClassName}
-      src={`//cdn.jsdelivr.net/npm/heroicons@1.0.1/outline/${name}.svg`}
+      src={`/icons/${name}.svg`}
       beforeInjection={
         className ? (svg: any) => svg.classList.add(...classes) : undefined
       }

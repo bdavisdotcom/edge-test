@@ -7,6 +7,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      backgroundPosition: {
+        "right-5": "right 1.25rem center",
+      },
       colors: {
         darkblue: "#00447c",
         lightblue: "#7499b8",

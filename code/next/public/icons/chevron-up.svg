@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#00447c">
+  <g id="chevron-down-Bold" transform="translate(24 24) rotate(180)">
+    <rect id="Path" width="24" height="24" fill="rgba(255,255,255,0)" />
+    <path id="chevron-down-Bold_1_"
+      d="M944.707,1970.707l-9,9a1,1,0,0,1-1.414,0l-9-9a1,1,0,1,1,1.414-1.414l8.293,8.293,8.293-8.293a1,1,0,1,1,1.414,1.414Z"
+      transform="translate(-923 -1962)" />
+  </g>
+</svg>

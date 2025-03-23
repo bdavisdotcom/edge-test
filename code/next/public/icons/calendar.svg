@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="20"
+   height="20"
+   viewBox="0 0 20 20"
+   version="1.1"
+   id="svg1"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   fill="#41416e">
+  <defs
+     id="defs1" />
+  <g
+     id="magicoon-Bold"
+     transform="translate(-397,-1964)">
+    <g
+       id="calendar-Bold"
+       transform="translate(395,1962)">
+      <path
+         id="calendar-Bold_1_"
+         d="m 412,1965 a 1,1 0 0 0 -2,0 h -6 a 1,1 0 0 0 -2,0 5.006,5.006 0 0 0 -5,5 v 9 a 5.006,5.006 0 0 0 5,5 h 10 a 5.006,5.006 0 0 0 5,-5 v -9 a 5.006,5.006 0 0 0 -5,-5 z m -10,2 v 1 a 1,1 0 0 0 2,0 v -1 h 6 v 1 a 1,1 0 0 0 2,0 v -1 a 3,3 0 0 1 3,3 h -16 a 3,3 0 0 1 3,-3 z m 10,15 h -10 a 3,3 0 0 1 -3,-3 v -7 h 16 v 7 a 3,3 0 0 1 -3,3 z m 0,-7 a 1,1 0 1 1 -1,-1 1,1 0 0 1 1,1 z m -4,0 a 1,1 0 1 1 -1,-1 1,1 0 0 1 1,1 z m -4,0 a 1,1 0 1 1 -1,-1 1,1 0 0 1 1,1 z m 8,4 a 1,1 0 1 1 -1,-1 1,1 0 0 1 1,1 z m -4,0 a 1,1 0 1 1 -1,-1 1,1 0 0 1 1,1 z m -4,0 a 1,1 0 1 1 -1,-1 1,1 0 0 1 1,1 z"
+         transform="translate(-395,-1962)" />
+    </g>
+  </g>
+</svg>

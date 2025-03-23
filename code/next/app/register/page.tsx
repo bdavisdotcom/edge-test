@@ -57,7 +57,7 @@ export default function Register() {
     }
 
     if (!token) {
-      form.setError("root", { type: "custom", message: "Unable to login. Please ensure your email and password are correct" });
+      form.setError("root", { type: "custom", message: msg || "Unable to login. Please ensure your email and password are correct" });
     } else {
         router.push("/");
     }

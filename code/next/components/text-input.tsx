@@ -1,6 +1,6 @@
 import { ComponentProps, forwardRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
-// import { Icon } from "../text";
+import { Icon } from "@/components/icon";
 
 export type TextInputProps = {
   setValue?: (value: string) => void;
@@ -45,7 +45,7 @@ const TextInput = forwardRef(function TextInputWithoutRef(
             setInputType((val) => (val === "password" ? "text" : "password"))
           }
         >
-          {/* <Icon name={inputType === "password" ? "eye-slash" : "eye"} /> */}
+          <Icon name={inputType === "password" ? "eye-slash" : "eye"} />
         </button>
       )}
     </>

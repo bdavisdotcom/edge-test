@@ -32,13 +32,16 @@ export default function Login() {
 
   const onSubmit = async (data: LoginParams) => {
     let token = "";
+    let msg = "";
+
     try {
       const response = await axios.post("/api/auth/login", data);
       token = response.data?.user?.jwt;
       const user = response.data?.user;
       createSession(token);
       setCurrentUser(user);
-    } catch (error) {
+    } catch (error: any) {
+      msg = error.response?.data?.message;
       console.log(error);
       token = "";
     }
@@ -49,7 +52,7 @@ export default function Login() {
       form.setError("root", {
         type: "custom",
         message:
-          "Unable to login. Please ensure your email and password are correct.",
+          msg || "Unable to login. Please ensure your email and password are correct.",
       });
     }
   };

@@ -53,20 +53,20 @@ module.exports = {
     },
 
     getTasks: async(userId, orderBy, direction) => {
-        const order_clause = ['created_at', 'due_date', 'priority', 'status'].indexOf(orderBy) == -1 ? 'created_at' : orderBy;
-        const direction_clause = ['asc', 'desc'].indexOf(direction) == -1 ? 'asc' : direction;
+        const order_clause = ['created_at', 'updated_at', 'due_date', 'title', 'description', 'priority', 'status', 'id'].indexOf(orderBy) == -1 ? 'created_at' : orderBy;
+        // const direction_clause = ['asc', 'desc'].indexOf(direction) == -1 ? 'ASC' : direction;
 
-        console.log(`order clause ${order_clause}`);
-        console.log(`dir clause ${direction_clause}`);
-
+        console.log(order_clause);
+        console.log(direction);
+        
         const tasks = await sql`
             SELECT id, user_id, title, description, due_date, priority, status, created_at, updated_at
             FROM tasks
             WHERE user_id = ${ userId }
-            ORDER BY id ASC
+            ORDER BY ${sql(order_clause)} ${ direction === "desc" ? sql`desc` : sql`asc` }
         `;
 
-            // ORDER BY ${ order_clause + ' ' + direction_clause }
+        console.dir(tasks);
         
         return fixTaskPostgresDriverLongIssue(tasks);
     },

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg id="sort-descending-Bold" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+  viewBox="0 0 24 24" fill="#41416e">
+  <rect id="Path" width="24" height="24" fill="rgba(255,255,255,0)" />
+  <path id="sort-descending-Bold_1_"
+    d="M695,1892a10,10,0,1,0,10,10A10.011,10.011,0,0,0,695,1892Zm0,18a8,8,0,1,1,8-8A8.009,8.009,0,0,1,695,1910Zm5-12a1,1,0,0,1-1,1h-8a1,1,0,0,1,0-2h8A1,1,0,0,1,700,1898Zm-1.5,4a1,1,0,0,1-1,1h-5a1,1,0,0,1,0-2h5A1,1,0,0,1,698.5,1902Zm-1.5,4a1,1,0,0,1-1,1h-2a1,1,0,0,1,0-2h2A1,1,0,0,1,697,1906Z"
+    transform="translate(-683 -1890)" />
+</svg>
