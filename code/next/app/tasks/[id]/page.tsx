@@ -15,11 +15,14 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { getSession } from "@/lib/session";
 import axios from "axios";
+import { isDate, isValid } from "date-fns";
 
 const schema = yup.object({
   priority: yup.number().required().label("Priority"),
   status: yup.string().required().label("Status"),
-  due_date: yup.string().required().label("Due Date"),
+  due_date: yup.number().transform((value, orig, ctx) => {
+      return (new Date(orig)).getTime();
+    }).required().label("Due Date"),
   title: yup.string().required().label("Title"),
   description: yup.string().required().label("Description"),
 });
@@ -27,7 +30,7 @@ const schema = yup.object({
 type TaskParams = {
   priority: number;
   status: string;
-  due_date: string;
+  due_date: number;
   title: string;
   description: string;
 }
@@ -44,11 +47,8 @@ export default function ManageTask({ params }: { params: { id: string } }) {
 
   const onSubmit = async (data: TaskParams) => {
     try {
-      console.log("SUBMIT");
-      console.dir(data);
-
       const url = isEditing ? `/api/tasks/${id}` : '/api/tasks';
-      await axios.post(url, { ...data, due_date: (new Date(data.due_date)).getTime() });
+      await axios.post(url, data);
       notify(
         `Successfully ${isEditing ? "updated" : "added"} ${data.title}`
       );
@@ -56,9 +56,9 @@ export default function ManageTask({ params }: { params: { id: string } }) {
     } catch (error) {
       form.setError("root", {
         type: "custom",
-        message: `Unable to ${isEditing ? "update" : "add"} ${
+        message: `Unable to ${isEditing ? "update" : "add"} "${
           data.title
-        }. Please try again.`,
+        }". Please try again.`,
       });
     }
   };
@@ -79,68 +79,72 @@ export default function ManageTask({ params }: { params: { id: string } }) {
   }, []);
 
   return (
-    <form onSubmit={form.handleSubmit(onSubmit)}>
+    <div>
+      <form className="p-4" onSubmit={form.handleSubmit(onSubmit)}>
 
-      <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4">
 
-        <H1>Task</H1>
+        <div className="p-4">
+          <H1>Tasks</H1>
+        </div>
 
-        <div className="flex flex-row">
+          <div className="flex flex-row">
+            <TextInputGroup
+              type="text"
+              label="Priority"
+              name="priority"
+              form={form}
+              required
+              placeholder="1"
+            />
+          </div>
+
           <TextInputGroup
-            type="text"
-            label="Priority"
-            name="priority"
+              type="text"
+              label="Title"
+              name="title"
+              form={form}
+              placeholder=""
+            />
+
+          <div className="flex flex-row">
+            <SelectGroup
+              className="w-48"
+              label="Status"
+              name="status"
+              form={form}
+              required
+              placeholder="Status"
+              options={[{ label: "Open", value: "OPEN" }, { label: "Closed", value: "CLOSED" }]}
+            />
+          </div>
+
+          <TextAreaGroup
+            label="Description"
+            name="description"
             form={form}
-            required
-            placeholder="1"
+            placeholder="Add task notes here"
+            style={{ minHeight: 130 }}
           />
+
+          <div className="flex flex-row">
+            <DateInputGroup
+              label="Due Date"
+              placeholder="MM/DD/YYYY"
+              name="due_date"
+              form={form}            
+            />
+          </div>
+
+          {form.formState.errors.root && (
+            <p className="text-orange text-sm font-medium mb-4">
+              {form.formState.errors.root.message}
+            </p>
+          )}
+
         </div>
 
-        <TextInputGroup
-            type="text"
-            label="Title"
-            name="title"
-            form={form}
-            placeholder=""
-          />
-
-        <div className="flex flex-row">
-          <SelectGroup
-            className="w-48"
-            label="Status"
-            name="status"
-            form={form}
-            required
-            placeholder="Status"
-            options={[{ label: "Open", value: "OPEN" }, { label: "Closed", value: "CLOSED" }]}
-          />
-        </div>
-
-        <TextAreaGroup
-          label="Description"
-          name="description"
-          form={form}
-          placeholder="Add task notes here"
-          style={{ minHeight: 130 }}
-        />
-
-        <div className="flex flex-row">
-          <DateInputGroup
-            label="Due Date"
-            placeholder="MM/DD/YYYY"
-            name="due_date"
-            form={form}            
-          />
-        </div>
-
-        {form.formState.errors.root && (
-          <p className="text-orange text-sm font-medium mb-4">
-            {form.formState.errors.root.message}
-          </p>
-        )}
-
-      </div>
-      <Button
+        <Button
           loading={form.formState.isSubmitting}
           className="w-1/3"
           priority="primary"
@@ -148,6 +152,11 @@ export default function ManageTask({ params }: { params: { id: string } }) {
         >
           { isEditing ? "Update Task" : "Add Task" }
         </Button>
-    </form>
+
+      </form>
+
+      <a className="m-4 underline" href="/tasks">Back</a>
+
+    </div>
   );
 }

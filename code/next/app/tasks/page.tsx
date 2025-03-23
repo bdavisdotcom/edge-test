@@ -16,7 +16,7 @@ import { AgGridReact } from "@ag-grid-community/react";
 import { getSession } from "@/lib/session";
 
 const displayDateFormater = (params: any) => {
-  return (new Date(params.value)).toLocaleString();
+  return (new Date(params.value)).toLocaleDateString();
 }
 
 export default function Tasks() {
@@ -76,63 +76,61 @@ export default function Tasks() {
     {
       headerName: "ID",
       field: "id",
-      width: 100,
-      cellClass: "font-medium cursor-pointer",
+      width: 25,
+      cellClass: "font-medium",
       sortable: true,
     },
     {
       headerName: "Priority",
       field: "priority",
       cellClass: "cursor-pointer",
-      width: 80,
+      width: 25,
       sortable: true,
     },
     {
       headerName: "Status",
       field: "status",
-      width: 80,
+      width: 25,
       sortable: true,
     },
     {
       headerName: "Due Date",
       field: "due_date",
-      cellClass: "justify-center cursor-pointer",
       headerClass: "justify-center",
-      width: 80,
+      cellClass: "justify-end",
+      width: 25,
       valueFormatter: displayDateFormater,
       sortable: true,
     },
     {
       headerName: "Title",
       field: "title",
-      cellClass: "justify-center",
       headerClass: "justify-center",
-      width: 80,
+      width: 40,
       sortable: true,
     },    
     {
       headerName: "Description",
       field: "description",
-      cellClass: "justify-center",
       headerClass: "justify-center",
-      width: 80,
+      width: 125,
       sortable: true,
     },        
     {
       headerName: "Updated",
       field: "updated_at",
-      cellClass: "justify-center",
       headerClass: "justify-center",
-      width: 80,
+      cellClass: "justify-end",
+      width: 25,
       valueFormatter: displayDateFormater,
       sortable: true,
     },        
     {
       headerName: "Created",
       field: "created_at",
-      cellClass: "justify-center",
       headerClass: "justify-center",
-      width: 80,
+      cellClass: "justify-end",
+      width: 25,
       valueFormatter: displayDateFormater,
       sortable: true,
     },                
@@ -158,7 +156,7 @@ export default function Tasks() {
           </div>
         ),
       sortable: false,
-      width: 120,
+      width: 80,
     },
   ];
 
