@@ -15,6 +15,12 @@ export default function Page() {
                 <li>Manage Tasks</li>
             </ul>
             <H2>Tech Stack</H2>
+            <H3>Overall</H3>
+            <ul className="list-disc mx-4 mb-4">
+                <li>Containerized Docker application</li>
+                <li>See docker-compose.yaml</li>
+                <li>Base images pulled from DockerHub</li>
+            </ul>
             <H3>Front End</H3>
             <ul className="list-disc mx-4 mb-4">
                 <li>NextJS</li>

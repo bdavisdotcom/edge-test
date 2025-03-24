@@ -89,7 +89,7 @@ export default function Login() {
             </p>
         )}
 
-        <Button priority="primary" size="large">
+        <Button loading={form.formState.isSubmitting} priority="primary" size="large">
             Login
         </Button>
         </form>
