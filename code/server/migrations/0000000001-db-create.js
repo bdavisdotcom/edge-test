@@ -22,7 +22,6 @@ exports.up = async function (DB) {
         title VARCHAR(256) NOT NULL,
         description TEXT DEFAULT '',
         due_date BIGINT NOT NULL,
-        priority int NOT NULL,
         status varchar(256) DEFAULT 'OPEN',
         created_at BIGINT NOT NULL,
         updated_at BIGINT NOT NULL,
@@ -33,13 +32,11 @@ exports.up = async function (DB) {
 
     await DB`CREATE INDEX IF NOT EXISTS idx_tasks_created_at ON tasks (created_at)`;
     await DB`CREATE INDEX IF NOT EXISTS idx_tasks_due_date ON tasks (due_date)`;
-    await DB`CREATE INDEX IF NOT EXISTS idx_tasks_priority ON tasks (priority)`;
 
   }
   
   exports.down = async function (DB) {
 
-    await DB`DROP INDEX idx_tasks_priority`
     await DB`DROP INDEX idx_tasks_due_date`
     await DB`DROP INDEX idx_tasks_created_at`
     await DB`DROP TABLE tasks`

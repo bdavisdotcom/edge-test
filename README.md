@@ -16,6 +16,7 @@
 * "ley" DB migrations
 * nodeJS Rest API
 * express
+* express-jwt for auth tokens
 * in regular JS 
 
 #### /next
@@ -24,3 +25,4 @@
 * react hook form + yup
 * React AG Grid
 * Tailwind CSS
+* Layout is responsive, but Data Grid is not

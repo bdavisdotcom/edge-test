@@ -1,10 +1,10 @@
 const sql = require('../database/db.js');
 
 module.exports = {
-    createTask: async ({ user_id, title, description, due_date, priority, status }) => {
+    createTask: async ({ user_id, title, description, due_date, status }) => {
         const created_at = updated_at = (new Date()).getTime();
 
-        const tasks = await sql.createTask({ user_id, title, description, due_date, priority, status, created_at, updated_at })
+        const tasks = await sql.createTask({ user_id, title, description, due_date, status, created_at, updated_at })
 
         return tasks[0];
     },
@@ -20,10 +20,10 @@ module.exports = {
         return task.length > 0 ? task[0] : null;
     },
 
-    updateTask: async(id, user_id, { title, description, due_date, priority, status }) => {
+    updateTask: async(id, user_id, { title, description, due_date, status }) => {
         const updated_at = (new Date()).getTime();
 
-        await sql.updateTask(id, user_id, { title, description, due_date, priority, status, updated_at });
+        await sql.updateTask(id, user_id, { title, description, due_date, status, updated_at });
 
         return await sql.getTaskById(id, user_id)[0];
     },

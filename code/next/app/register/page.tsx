@@ -12,6 +12,7 @@ import { TextInputGroup } from "@/components/text-input-group";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { UserContext } from "@/components/user-context";
 import { useContext } from "react";
+import { useOverlay } from "@/components/overlays/overlays-provider";
 
 type RegisterParams = {
   name: string;
@@ -28,6 +29,7 @@ const fieldSchema = {
 
 export default function Register() {
   const { setCurrentUser } = useContext(UserContext);
+  const { notify } = useOverlay();
   const router = useRouter();
   const schema = yup.object(fieldSchema);
 
@@ -46,6 +48,9 @@ export default function Register() {
       const response = await axios.post("/api/auth/register", data);
       console.dir(response);
       token = response.data?.user?.jwt;
+      notify(
+        `Registration successful`
+      );
       createSession(token);
       setCurrentUser(response.data?.user);
     } catch (error: any) {

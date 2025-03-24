@@ -12,6 +12,7 @@ import { User } from "@/lib/types";
 import { UserContext } from "@/components/user-context";
 import { getSession } from "@/lib/session";
 import axios from "axios";
+import { useOverlay } from "@/components/overlays/overlays-provider";
 
 type ProfileParams = {
   name: string;
@@ -26,6 +27,7 @@ const fieldSchema = {
 export default function Profile() {
   const router = useRouter();
   const { currentUser, setCurrentUser } = useContext(UserContext);
+  const { notify } = useOverlay();
   const schema = yup.object(fieldSchema);
   const[message, setMessage] = useState<string>("");
 
@@ -55,12 +57,16 @@ export default function Profile() {
       const response = await axios.post("/api/user", { ...currentUser, ...data });
       const { user } = response.data;
 
+      notify(
+        `Profile updated`
+      );
+
       setCurrentUser({ ...currentUser, ...user });
-      setMessage("Profile updated");
 
     } catch (error: any) {
+      console.dir(error);
       const data = error.response?.data;
-      msg = data.message;
+      msg = data?.message;
       form.setError("root", { type: "custom", message: msg || "Unable to update profile"});
     }
   };

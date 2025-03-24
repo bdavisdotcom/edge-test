@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { UserContext } from "@/components/user-context";
 import { useContext } from "react";
+import { useOverlay } from "@/components/overlays/overlays-provider";
 
 type LoginParams = {
   email: string;
@@ -24,6 +25,8 @@ export const schema = yup.object({
 export default function Login() {
   const { setCurrentUser } = useContext(UserContext);
   const router = useRouter();
+  const { notify } = useOverlay();
+
   const form = useForm<yup.InferType<typeof schema>>({
     defaultValues: { email: "", password: "" },
     resolver: yupResolver(schema),
@@ -38,6 +41,9 @@ export default function Login() {
       const response = await axios.post("/api/auth/login", data);
       token = response.data?.user?.jwt;
       const user = response.data?.user;
+      notify(
+        `Login successful`
+      );
       createSession(token);
       setCurrentUser(user);
     } catch (error: any) {
