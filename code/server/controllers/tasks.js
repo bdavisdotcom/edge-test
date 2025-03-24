@@ -27,9 +27,9 @@ module.exports = {
 
     create: (req, res, next) => {
         const user = res.locals.user;
-        const { title, description, due_date, priority, status } = req.body;
+        const { title, description, due_date, status } = req.body;
 
-        tasks.createTask({ user_id: user.id, title, description, due_date, priority, status }).then(newTask => {
+        tasks.createTask({ user_id: user.id, title, description, due_date, status }).then(newTask => {
             res.json({ status: "OK", task: newTask });            
         }, err => {
             next(err);
@@ -39,9 +39,9 @@ module.exports = {
     update: (req, res, next) => {
         const { id } = req.params;
         const user = res.locals.user;
-        const { title, description, due_date, priority, status } = req.body;
+        const { title, description, due_date, status } = req.body;
 
-        tasks.updateTask(id, user.id, { title, description, due_date, priority, status }).then(updatedTask => {
+        tasks.updateTask(id, user.id, { title, description, due_date, status }).then(updatedTask => {
             res.json({ status: "OK", task: updatedTask });
         }, err => {
             next(err);

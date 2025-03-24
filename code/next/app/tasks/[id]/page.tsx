@@ -18,7 +18,6 @@ import axios from "axios";
 import { isDate, isValid } from "date-fns";
 
 const schema = yup.object({
-  priority: yup.number().required().label("Priority"),
   status: yup.string().required().label("Status"),
   due_date: yup.number().transform((value, orig, ctx) => {
       return (new Date(orig)).getTime();
@@ -28,7 +27,6 @@ const schema = yup.object({
 });
 
 type TaskParams = {
-  priority: number;
   status: string;
   due_date: number;
   title: string;
@@ -87,17 +85,6 @@ export default function ManageTask({ params }: { params: { id: string } }) {
         <div className="p-4">
           <H1>Tasks</H1>
         </div>
-
-          <div className="flex flex-row">
-            <TextInputGroup
-              type="text"
-              label="Priority"
-              name="priority"
-              form={form}
-              required
-              placeholder="1"
-            />
-          </div>
 
           <TextInputGroup
               type="text"

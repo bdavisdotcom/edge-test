@@ -62,7 +62,6 @@ paths:
               enum:
                 - created_at
                 - due_date
-                - priority
                 - status
         - name: direction
           in: query
@@ -132,7 +131,7 @@ components:
   schemas:
 
     TaskCreate:
-      required: [title, description, due_date, priority, status]
+      required: [title, description, due_date, status]
       properties:
         title:
           type: string
@@ -141,8 +140,6 @@ components:
         due_date:
           type: integer
           format: int64
-        priority:
-          type: integer
         status:
           type: string
 

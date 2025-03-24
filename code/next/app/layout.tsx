@@ -15,6 +15,9 @@ export default function RootLayout({
 
     return (
         <html lang="en">
+            <head>
+                <title>Task Example App</title>
+            </head>
             <body className="flex flex-col h-screen overflow-hidden">
                 <UserContextProvider>
                     <header className="bg-indigo-800">
