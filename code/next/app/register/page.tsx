@@ -100,7 +100,7 @@ export default function Register() {
               </p>
           )}
 
-          <Button priority="primary" size="large">Register</Button>
+          <Button loading={form.formState.isSubmitting} priority="primary" size="large">Register</Button>
       </form>
     </div>
     
