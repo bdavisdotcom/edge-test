@@ -21,6 +21,7 @@
 
 #### /next
 * NextJS / React front-end
+* Typescript
 * react hook form + yup
 * React AG Grid
 * Tailwind CSS
